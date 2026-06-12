@@ -1,69 +1,74 @@
-<p align="center">
-  <img src="RayStudio.png" alt="RayStudio" width="120" />
-</p>
+# StateForge
 
-<h1 align="center">StateForge</h1>
-<p align="center"><strong>Automatic State Machine generation from code, logs and UI flows</strong></p>
-<p align="center">
-  <a href="README.de.md">Deutsch</a> ·
-  <a href="https://github.com/9t29zhmwdh-coder/StateForge">GitHub</a> ·
-  <a href="LICENSE">MIT License</a>
-</p>
+[🇩🇪 Deutsche Version](README.de.md)
+
+**Automatic state machine generation from code, logs, and UI flows — built with Rust + Tauri.**
+
+StateForge automatically extracts state machines from source code, log files, API sequences, or natural language descriptions and visualizes them as interactive diagrams. It helps you understand complex flows, document them automatically, and regenerate clean state machine code in your target language.
+
+![Rust](https://img.shields.io/badge/Rust-1.77+-orange?logo=rust)
+![Tauri](https://img.shields.io/badge/Tauri-v2-blue?logo=tauri)
+![Platform](https://img.shields.io/badge/Platform-macOS%20%7C%20Windows%20%7C%20Linux-lightgrey)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 ---
 
-## What is StateForge?
-
-StateForge is a developer tool that **automatically extracts state machines** from source code, log files, API sequences or natural language descriptions — and visualizes them as interactive diagrams.
-
-It helps you understand complex flows, automatically document them, and regenerate clean state machine code in your target language.
-
 ## Features
 
-| Module | Description |
+| Feature | Description |
 |---|---|
 | **Code Parser** | Extracts state machines from Swift, Kotlin, TypeScript, Go, Rust |
-| **Log Analyzer** | Reconstructs state flows from log files |
+| **Log Analyzer** | Reconstructs state flows from log files (JSON, plaintext, nginx, syslog) |
 | **Diagram Engine** | Renders Mermaid, GraphViz DOT, SVG, interactive React Flow |
 | **Code Generator** | Generates idiomatic state machine code in 5 languages |
-| **AI Integration** | Claude / Ollama — enhance machines or create from description |
-| **Plugin System** | Extend with custom parsers |
+| **AI Integration** | Claude / Ollama — enhance machines or create from natural language |
+| **Plugin System** | Extend with custom parsers via Rust trait |
 
-## Tech Stack
+---
 
-- **Core** — Rust (async, petgraph, sqlx, regex)
-- **Desktop** — Tauri v2
-- **Frontend** — React, TypeScript, Tailwind CSS, @xyflow/react, Mermaid
+## Requirements
 
-## Getting Started
+- [Rust](https://rustup.rs/) 1.77+
+- [Node.js](https://nodejs.org/) 20+
+- [Tauri CLI v2](https://tauri.app/): `cargo install tauri-cli`
+- macOS / Windows / Linux
+
+---
+
+## Quick Start
 
 ```bash
-# Prerequisites: Rust, Node.js 18+, npm
 git clone https://github.com/9t29zhmwdh-coder/StateForge
 cd StateForge
 
-npm --prefix frontend install
+cd frontend && npm install && cd ..
 cargo tauri dev
 ```
 
-## Usage
+### Usage
 
 1. **Import** — paste source code, a log file, or describe your flow in natural language
-2. **Analyze** — StateForge extracts states, transitions, events and guards automatically
+2. **Analyze** — StateForge extracts states, transitions, events, and guards automatically
 3. **Visualize** — drag-and-drop diagram editor with live sync to the extracted model
-4. **Generate** — export clean state machine code in Swift, Kotlin, TypeScript, Go or Rust
+4. **Generate** — export clean state machine code in Swift, Kotlin, TypeScript, Go, or Rust
 
-## Supported Input Formats
+---
 
-- **Swift** — enums, TCA Reducers, `@Observable` / `@Published`
-- **Kotlin** — sealed classes, `when` expressions, ViewModel state
-- **TypeScript** — XState `createMachine`, union types, Redux reducers
-- **Go** — iota constants, switch FSMs, `SetState()` / `Transition()` patterns
-- **Logs** — key=value, JSON, Nginx, Docker, Syslog
+## Supported Inputs
+
+| Input | Formats |
+|---|---|
+| **Swift** | Enums, TCA Reducers, `@Observable` / `@Published` |
+| **Kotlin** | Sealed classes, `when` expressions, ViewModel state |
+| **TypeScript** | XState `createMachine`, union types, Redux reducers |
+| **Go** | iota constants, switch FSMs, `SetState()` / `Transition()` |
+| **Logs** | key=value, JSON, Nginx, Docker, Syslog |
+
+---
 
 ## Diagram Formats
 
-| Format | Use case |
+| Format | Use Case |
 |---|---|
 | Interactive (React Flow) | Drag-and-drop editing, live sync |
 | Mermaid stateDiagram-v2 | Markdown docs, GitHub |
@@ -72,8 +77,4 @@ cargo tauri dev
 
 ---
 
-<p align="right">
-  <sub>by <a href="https://github.com/9t29zhmwdh-coder">RayStudio</a> &nbsp;·&nbsp; MIT License</sub>
-  &nbsp;
-  <img src="RayStudio.png" alt="" width="70" align="right" />
-</p>
+**Author:** [Rafael Yilmaz](https://github.com/9t29zhmwdh-coder) · **Status:** Framework Preview · **Last Updated:** Juni 2026
