@@ -25,7 +25,7 @@ StateForge automatically extracts state machines from source code, log files, AP
 | **Log Analyzer** | Reconstructs state flows from log files (JSON, plaintext, nginx, syslog) |
 | **Diagram Engine** | Renders Mermaid, GraphViz DOT, SVG, interactive React Flow |
 | **Code Generator** | Generates idiomatic state machine code in 5 languages |
-| **AI Integration** | Claude / Ollama — enhance machines or create from natural language |
+| **AI Integration** | Local AI (Ollama) — enhance machines or create from natural language |
 | **Plugin System** | Extend with custom parsers via Rust trait |
 
 ---
