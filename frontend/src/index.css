@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'JetBrains Mono', monospace;
+  background: #0d1117;
+  color: #e6edf3;
+  height: 100vh;
+  overflow: hidden;
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #161b22; }
+::-webkit-scrollbar-thumb { background: #30363d; border-radius: 3px; }
+
+.react-flow__background { background: #0d1117; }
+.react-flow__minimap { background: #161b22; border: 1px solid #30363d; border-radius: 6px; }
+.react-flow__controls { background: #161b22; border: 1px solid #30363d; border-radius: 6px; }
+.react-flow__controls-button { background: #161b22; border-color: #30363d; color: #8b949e; }
+.react-flow__controls-button:hover { background: #21262d; color: #e6edf3; }
