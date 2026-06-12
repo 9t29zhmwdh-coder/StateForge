@@ -1,4 +1,8 @@
-# StateForge
+<div align="center">
+  <img src="RayStudio.png" alt="RayStudio Logo" width="120"/>
+
+  <h1>StateForge</h1>
+</div>
 
 [🇬🇧 English Version](README.md)
 
@@ -76,5 +80,10 @@ cargo tauri dev
 | SVG | Eigenständiger Export, Präsentationen |
 
 ---
+
+<div align="right">
+  <sub>by</sub><br/>
+  <img src="RayStudio.png" alt="RayStudio" width="70"/>
+</div>
 
 **Author:** [Rafael Yilmaz](https://github.com/9t29zhmwdh-coder) · **Status:** Framework Preview · **Last Updated:** Juni 2026
