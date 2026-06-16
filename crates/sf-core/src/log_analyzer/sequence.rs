@@ -43,6 +43,10 @@ static EVENT_PATTERN: Lazy<Regex> = Lazy::new(|| {
 
 pub struct LogSequenceExtractor;
 
+impl Default for LogSequenceExtractor {
+    fn default() -> Self { Self::new() }
+}
+
 impl LogSequenceExtractor {
     pub fn new() -> Self { Self }
 
