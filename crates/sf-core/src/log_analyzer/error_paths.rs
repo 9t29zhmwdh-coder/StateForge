@@ -12,6 +12,10 @@ static DEAD_STATE: Lazy<Regex> = Lazy::new(|| {
 
 pub struct ErrorPathDetector;
 
+impl Default for ErrorPathDetector {
+    fn default() -> Self { Self::new() }
+}
+
 impl ErrorPathDetector {
     pub fn new() -> Self { Self }
 
