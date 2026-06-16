@@ -59,7 +59,7 @@ pub(crate) mod helpers {
         }
     }
 
-    pub fn transition_kind_from_names(from: &str, to: &str, event: Option<&str>) -> TransitionKind {
+    pub fn transition_kind_from_names(_from: &str, to: &str, event: Option<&str>) -> TransitionKind {
         let to_lower = to.to_lowercase();
         let event_lower = event.map(|e| e.to_lowercase()).unwrap_or_default();
 
