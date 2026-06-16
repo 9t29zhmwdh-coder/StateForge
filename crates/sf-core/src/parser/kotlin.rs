@@ -66,7 +66,7 @@ impl CodeParser for KotlinParser {
             for sub_cap in SEALED_SUBCLASS.captures_iter(&cap[2]) {
                 let sub_name = sub_cap[1].to_string();
                 let kind = helpers::state_kind_from_name(&sub_name);
-                let mut state = State::new(&sub_name, kind);
+                let state = State::new(&sub_name, kind);
                 found_states.insert(sub_name.clone(), state.id.clone());
                 sm.add_state(state);
             }
@@ -95,11 +95,11 @@ impl CodeParser for KotlinParser {
 
                 for assign_cap in STATE_ASSIGN.captures_iter(branch_body) {
                     let to_state = &assign_cap[1];
-                    if let (Some(&from_id), Some(&to_id)) = (
+                    if let (Some(from_id), Some(to_id)) = (
                         found_states.get(from_state), found_states.get(to_state)
                     ) {
                         let event = events.first().cloned();
-                        let mut t = Transition::new(from_id, to_id, event.clone());
+                        let mut t = Transition::new(from_id.clone(), to_id.clone(), event.clone());
                         t.kind = helpers::transition_kind_from_names(from_state, to_state, event.as_deref());
                         sm.add_transition(t);
                     }
