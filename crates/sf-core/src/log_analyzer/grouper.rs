@@ -3,6 +3,10 @@ use uuid::Uuid;
 
 pub struct FlowGrouper;
 
+impl Default for FlowGrouper {
+    fn default() -> Self { Self::new() }
+}
+
 impl FlowGrouper {
     pub fn new() -> Self { Self }
 
@@ -37,7 +41,7 @@ impl FlowGrouper {
             });
         }
 
-        groups.sort_by(|a, b| b.frequency.cmp(&a.frequency));
+        groups.sort_by_key(|g| std::cmp::Reverse(g.frequency));
         groups
     }
 }
