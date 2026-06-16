@@ -26,7 +26,7 @@ pub fn compute_layout(sm: &StateMachine) -> HashMap<String, (f32, f32)> {
             Some(s) => s,
             None => continue,
         };
-        let count = states.len();
+        let _count = states.len();
         for (i, sid) in states.iter().enumerate() {
             let x = PADDING + i as f32 * (NODE_W + H_GAP);
             let y = PADDING + rank as f32 * (NODE_H + V_GAP);
