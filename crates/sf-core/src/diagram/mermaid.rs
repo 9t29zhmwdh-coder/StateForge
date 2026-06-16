@@ -41,11 +41,9 @@ pub fn render_state(sm: &StateMachine, config: &DiagramConfig) -> Result<String>
         }
 
         // Entry/exit actions
-        if config.include_entry_exit {
-            if !state.entry_actions.is_empty() {
-                out.push_str(&format!("    note right of {}\n        entry: {}\n    end note\n",
-                    sname, state.entry_actions.join(", ")));
-            }
+        if config.include_entry_exit && !state.entry_actions.is_empty() {
+            out.push_str(&format!("    note right of {}\n        entry: {}\n    end note\n",
+                sname, state.entry_actions.join(", ")));
         }
     }
 
@@ -121,7 +119,7 @@ pub fn render_sequence(sm: &StateMachine, _config: &DiagramConfig) -> Result<Str
         let Some(from) = sm.state_by_id(&t.from_state) else { continue };
         let Some(to)   = sm.state_by_id(&t.to_state)   else { continue };
         let label = t.event.as_deref().unwrap_or("→");
-        let _arrow = if t.kind == TransitionKind::Error { "->>" } else { "->>" };
+        let _arrow = "->>";
         out.push_str(&format!("    {}->>{}:{}\n", sanitize(&from.name), sanitize(&to.name), label));
     }
 
