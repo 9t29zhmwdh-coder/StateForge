@@ -90,10 +90,10 @@ impl CodeParser for SwiftParser {
 
                 for to_cap in Regex::new(r"(?:state|currentState)\s*=\s*\.(\w+)").unwrap().captures_iter(case_body) {
                     let to_name = &to_cap[1];
-                    if let (Some(&from_id), Some(&to_id)) = (
+                    if let (Some(from_id), Some(to_id)) = (
                         found_states.get(from_name), found_states.get(to_name)
                     ) {
-                        let mut t = Transition::new(from_id, to_id, Some(from_name.to_string()));
+                        let mut t = Transition::new(from_id.clone(), to_id.clone(), Some(from_name.to_string()));
                         t.kind = helpers::transition_kind_from_names(from_name, to_name, Some(from_name));
                         sm.add_transition(t);
                     }
@@ -106,7 +106,7 @@ impl CodeParser for SwiftParser {
             let event = &cap[1];
             let next_state = &cap[2];
 
-            if let Some(&to_id) = found_states.get(next_state) {
+            if let Some(to_id) = found_states.get(next_state) {
                 // If we know the current state from context, use it; otherwise create "any → next"
                 for (from_name, from_id) in &found_states {
                     if from_name != next_state {
