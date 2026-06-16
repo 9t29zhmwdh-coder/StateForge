@@ -19,6 +19,7 @@ static WHEN_EXPR: Lazy<Regex> = Lazy::new(|| {
 static WHEN_BRANCH_IS: Lazy<Regex> = Lazy::new(|| {
     Regex::new(r"is\s+\w+\.(\w+)\s*->").unwrap()
 });
+#[allow(dead_code)]
 static WHEN_BRANCH_ELSE: Lazy<Regex> = Lazy::new(|| {
     Regex::new(r"else\s*->").unwrap()
 });
@@ -56,7 +57,7 @@ impl CodeParser for KotlinParser {
             let class_name = &cap[1];
             let class_lower = class_name.to_lowercase();
 
-            let is_state_class = class_lower.contains("state") || class_lower.contains("ui") || class_lower.contains("status");
+            let _is_state_class = class_lower.contains("state") || class_lower.contains("ui") || class_lower.contains("status");
             let is_intent_class = class_lower.contains("intent") || class_lower.contains("action") || class_lower.contains("event");
 
             if is_intent_class { continue; }
