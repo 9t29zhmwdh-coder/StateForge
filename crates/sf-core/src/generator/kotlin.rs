@@ -1,3 +1,4 @@
+#![allow(unused_imports)]
 use crate::models::{StateMachine, StateKind};
 use super::CodeGenerator;
 use anyhow::Result;
