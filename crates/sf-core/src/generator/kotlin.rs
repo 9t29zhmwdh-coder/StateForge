@@ -48,7 +48,7 @@ impl CodeGenerator for KotlinGenerator {
         out.push_str(&format!(
             "class {}ViewModel : ViewModel() {{\n    private val _state = MutableStateFlow<{}UiState>({}UiState.{})\n    val state: StateFlow<{}UiState> = _state\n\n",
             name, name, name,
-            pascal(&sm.states.first().map(|s| s.name.as_str()).unwrap_or("Idle")),
+            pascal(sm.states.first().map(|s| s.name.as_str()).unwrap_or("Idle")),
             name
         ));
         out.push_str(&format!("    fun handleIntent(intent: {}Intent) {{\n        when (intent) {{\n", name));
