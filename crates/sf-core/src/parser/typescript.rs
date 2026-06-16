@@ -87,7 +87,7 @@ impl CodeParser for TypeScriptParser {
                 for t_cap in XSTATE_TRANSITION.captures_iter(&on_cap[1]) {
                     let event = t_cap[1].to_string();
                     let to_state = t_cap[2].to_string();
-                    if let Some(&to_id) = found_states.get(&to_state) {
+                    if let Some(to_id) = found_states.get(&to_state) {
                         for (from_name, from_id) in found_states.iter().take(1) {
                             let mut t = Transition::new(from_id.clone(), to_id.clone(), Some(event.clone()));
                             t.kind = helpers::transition_kind_from_names(from_name, &to_state, Some(&event));
@@ -127,7 +127,7 @@ impl CodeParser for TypeScriptParser {
 
                 for ret_cap in STATE_RETURN.captures_iter(case_body) {
                     let to_state = ret_cap[1].to_string();
-                    if let Some(&to_id) = found_states.get(&to_state) {
+                    if let Some(to_id) = found_states.get(&to_state) {
                         for (from_name, from_id) in found_states.iter().take(1) {
                             let mut t = Transition::new(from_id.clone(), to_id.clone(), Some(event.clone()));
                             t.kind = helpers::transition_kind_from_names(from_name, &to_state, Some(&event));
