@@ -121,7 +121,7 @@ pub fn render_sequence(sm: &StateMachine, _config: &DiagramConfig) -> Result<Str
         let Some(from) = sm.state_by_id(&t.from_state) else { continue };
         let Some(to)   = sm.state_by_id(&t.to_state)   else { continue };
         let label = t.event.as_deref().unwrap_or("→");
-        let arrow = if t.kind == TransitionKind::Error { "->>" } else { "->>" };
+        let _arrow = if t.kind == TransitionKind::Error { "->>" } else { "->>" };
         out.push_str(&format!("    {}->>{}:{}\n", sanitize(&from.name), sanitize(&to.name), label));
     }
 
