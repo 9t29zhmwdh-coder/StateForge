@@ -106,7 +106,7 @@ fn get_db_path() -> std::path::PathBuf {
 
 async fn cmd_parse(file: &str, format: &str, output: Option<&str>, db_path: &std::path::Path) -> Result<()> {
     let content = std::fs::read_to_string(file)?;
-    let mut sm = sf_core::parser::parse_file(file, &content)?;
+    let sm = sf_core::parser::parse_file(file, &content)?;
 
     let pool = sf_core::db::open(db_path).await?;
     sf_core::db::queries::insert_machine(&pool, &sm).await?;
