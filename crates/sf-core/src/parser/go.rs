@@ -83,10 +83,10 @@ impl CodeParser for GoParser {
 
                 for trans_cap in FSM_TRANSITION.captures_iter(case_body) {
                     let to_const = &trans_cap[1];
-                    if let (Some(&from_id), Some(&to_id)) = (
+                    if let (Some(from_id), Some(to_id)) = (
                         found_states.get(from_const), found_states.get(to_const)
                     ) {
-                        let mut t = Transition::new(from_id, to_id, Some(from_const.to_string()));
+                        let mut t = Transition::new(from_id.clone(), to_id.clone(), Some(from_const.to_string()));
                         t.kind = helpers::transition_kind_from_names(from_const, to_const, Some(from_const));
                         sm.add_transition(t);
                     }
