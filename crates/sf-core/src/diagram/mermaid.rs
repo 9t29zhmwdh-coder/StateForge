@@ -102,13 +102,15 @@ pub fn render_state(sm: &StateMachine, config: &DiagramConfig) -> Result<String>
 pub fn render_sequence(sm: &StateMachine, _config: &DiagramConfig) -> Result<String> {
     let mut out = String::from("sequenceDiagram\n");
 
-    // Group transitions by service/participant
-    let participants: std::collections::LinkedHashSet<String> = sm.transitions.iter()
+    // Group transitions by service/participant (insertion-order dedup)
+    let mut _seen = std::collections::HashSet::new();
+    let participants: Vec<String> = sm.transitions.iter()
         .flat_map(|t| {
             let from = sm.state_by_id(&t.from_state).map(|s| s.name.clone());
             let to = sm.state_by_id(&t.to_state).map(|s| s.name.clone());
             [from, to].into_iter().flatten()
         })
+        .filter(|p| _seen.insert(p.clone()))
         .collect();
 
     for p in &participants {
