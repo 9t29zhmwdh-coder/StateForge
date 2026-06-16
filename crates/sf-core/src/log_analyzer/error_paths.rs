@@ -3,11 +3,11 @@ use regex::Regex;
 use std::collections::HashSet;
 
 static ERROR_PATTERN: Lazy<Regex> = Lazy::new(|| {
-    Regex::new(r"(?i)(?:ERROR|FATAL|EXCEPTION|PANIC|CRASH|FAILED?)\s+(?:in\s+)?(?:state\s+)?['\"]?(\w+)['\"]?").unwrap()
+    Regex::new(r#"(?i)(?:ERROR|FATAL|EXCEPTION|PANIC|CRASH|FAILED?)\s+(?:in\s+)?(?:state\s+)?['\"]?(\w+)['\"]?"#).unwrap()
 });
 
 static DEAD_STATE: Lazy<Regex> = Lazy::new(|| {
-    Regex::new(r"(?i)(?:stuck|deadlock|timeout|unreachable|infinite loop)\s+(?:in\s+)?(?:state\s+)?['\"]?(\w+)['\"]?").unwrap()
+    Regex::new(r#"(?i)(?:stuck|deadlock|timeout|unreachable|infinite loop)\s+(?:in\s+)?(?:state\s+)?['\"]?(\w+)['\"]?"#).unwrap()
 });
 
 pub struct ErrorPathDetector;
