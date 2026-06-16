@@ -26,6 +26,7 @@ static TCA_REDUCE: Lazy<Regex> = Lazy::new(|| {
 });
 
 // @Observable / ObservableObject state property
+#[allow(dead_code)]
 static OBSERVABLE_STATE: Lazy<Regex> = Lazy::new(|| {
     Regex::new(r"(?:@Published\s+)?var\s+(?:state|currentState)\s*[=:]\s*(\w+)\.(\w+)").unwrap()
 });
