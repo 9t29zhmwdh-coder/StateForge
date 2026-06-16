@@ -162,12 +162,8 @@ impl StateMachine {
     }
 
     pub fn add_state(&mut self, state: State) {
-        if self.initial_state.is_none() || state.kind == StateKind::Initial {
-            if state.kind == StateKind::Initial {
-                self.initial_state = Some(state.id.clone());
-            } else if self.initial_state.is_none() {
-                self.initial_state = Some(state.id.clone());
-            }
+        if state.kind == StateKind::Initial || self.initial_state.is_none() {
+            self.initial_state = Some(state.id.clone());
         }
         self.states.push(state);
     }
