@@ -1,4 +1,4 @@
-#![allow(unused_imports)]
+#![allow(unused_imports, dead_code, unused_variables, unused_assignments)]
 use once_cell::sync::Lazy;
 use regex::Regex;
 use crate::models::analysis::{EventSequence, LogEvent};
