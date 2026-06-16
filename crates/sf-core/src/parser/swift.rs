@@ -31,6 +31,11 @@ static OBSERVABLE_STATE: Lazy<Regex> = Lazy::new(|| {
     Regex::new(r"(?:@Published\s+)?var\s+(?:state|currentState)\s*[=:]\s*(\w+)\.(\w+)").unwrap()
 });
 
+// state = .nextState / currentState = .nextState (in switch case body)
+static TRANSITION_RE: Lazy<Regex> = Lazy::new(|| {
+    Regex::new(r"(?:state|currentState)\s*=\s*\.(\w+)").unwrap()
+});
+
 pub struct SwiftParser;
 
 impl CodeParser for SwiftParser {
@@ -89,7 +94,7 @@ impl CodeParser for SwiftParser {
                     .unwrap_or(body.len());
                 let case_body = &body[case_start.min(body.len())..case_end.min(body.len())];
 
-                for to_cap in Regex::new(r"(?:state|currentState)\s*=\s*\.(\w+)").unwrap().captures_iter(case_body) {
+                for to_cap in TRANSITION_RE.captures_iter(case_body) {
                     let to_name = &to_cap[1];
                     if let (Some(from_id), Some(to_id)) = (
                         found_states.get(from_name), found_states.get(to_name)
