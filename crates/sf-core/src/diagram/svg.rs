@@ -19,7 +19,7 @@ pub fn render(sm: &StateMachine, _config: &DiagramConfig) -> Result<String> {
     let height = max_y + NODE_H + V_GAP;
 
     let mut svg = format!(
-        r#"<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}">
+        r##"<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}">
 <defs>
   <marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="6" markerHeight="6" orient="auto">
     <path d="M 0 0 L 10 5 L 0 10 z" fill="#555"/>
@@ -29,7 +29,7 @@ pub fn render(sm: &StateMachine, _config: &DiagramConfig) -> Result<String> {
   </marker>
 </defs>
 <rect width="{w}" height="{h}" fill="#0d1117"/>
-"#,
+"##,
         w = width as u32, h = height as u32
     );
 
@@ -59,7 +59,7 @@ pub fn render(sm: &StateMachine, _config: &DiagramConfig) -> Result<String> {
 
         if let Some(ref event) = t.event {
             svg.push_str(&format!(
-                r#"<text x="{}" y="{}" fill="#8b949e" font-family="{FONT}" font-size="10" text-anchor="middle">{}</text>"#,
+                r##"<text x="{}" y="{}" fill="#8b949e" font-family="{FONT}" font-size="10" text-anchor="middle">{}</text>"##,
                 cx, cy - 4.0, escape_xml(event)
             ));
         }
