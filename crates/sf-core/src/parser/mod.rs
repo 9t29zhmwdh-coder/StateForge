@@ -4,7 +4,7 @@ pub mod typescript;
 pub mod go;
 pub mod generic;
 
-use crate::models::{StateMachine, Language, AnalysisSource};
+use crate::models::{StateMachine, Language};
 use anyhow::Result;
 
 pub trait CodeParser: Send + Sync {
@@ -44,7 +44,7 @@ pub fn parse_with_language(content: &str, lang: Language) -> Result<StateMachine
 
 /// Shared helpers for all parsers
 pub(crate) mod helpers {
-    use crate::models::{State, StateKind, Transition, TransitionKind};
+    use crate::models::{StateKind, TransitionKind};
 
     pub fn state_kind_from_name(name: &str) -> StateKind {
         let lower = name.to_lowercase();
