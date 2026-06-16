@@ -30,7 +30,7 @@ static XSTATE_MACHINE: Lazy<Regex> = Lazy::new(|| {
     Regex::new(r"(?s)createMachine\s*\(\s*\{[^{]*states\s*:\s*\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}").unwrap()
 });
 static XSTATE_STATE: Lazy<Regex> = Lazy::new(|| {
-    Regex::new(r"(\w+)\s*:\s*\{[^{}]*(?:type\s*:\s*['\"](final|parallel|history)['\"])?").unwrap()
+    Regex::new(r#"(\w+)\s*:\s*\{[^{}]*(?:type\s*:\s*['\"](final|parallel|history)['\"])?"#).unwrap()
 });
 static XSTATE_ON: Lazy<Regex> = Lazy::new(|| {
     Regex::new(r"on\s*:\s*\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}").unwrap()
