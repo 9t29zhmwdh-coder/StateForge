@@ -6,7 +6,7 @@
 
 [🇩🇪 Deutsche Version](README.de.md)
 
-**Automatic state machine generation from code, logs, and UI flows — built with Rust + Tauri.**
+**Automatic state machine generation from code, logs and UI flows, built with Rust and Tauri.**
 
 StateForge automatically extracts state machines from source code, log files, API sequences, or natural language descriptions and visualizes them as interactive diagrams. It helps you understand complex flows, document them automatically, and regenerate clean state machine code in your target language.
 
@@ -26,7 +26,7 @@ StateForge automatically extracts state machines from source code, log files, AP
 | **Log Analyzer** | Reconstructs state flows from log files (JSON, plaintext, nginx, syslog) |
 | **Diagram Engine** | Renders Mermaid, GraphViz DOT, SVG, interactive React Flow |
 | **Code Generator** | Generates idiomatic state machine code in 5 languages |
-| **AI Integration** | Local AI (Ollama) — enhance machines or create from natural language |
+| **AI Integration** | Local AI (Ollama): enhance machines or create from natural language |
 | **Plugin System** | Extend with custom parsers via Rust trait |
 
 ---
@@ -52,10 +52,10 @@ cargo tauri dev
 
 ### Usage
 
-1. **Import** — paste source code, a log file, or describe your flow in natural language
-2. **Analyze** — StateForge extracts states, transitions, events, and guards automatically
-3. **Visualize** — drag-and-drop diagram editor with live sync to the extracted model
-4. **Generate** — export clean state machine code in Swift, Kotlin, TypeScript, Go, or Rust
+1. **Import**; paste source code, a log file, or describe your flow in natural language
+2. **Analyze**; StateForge extracts states, transitions, events, and guards automatically
+3. **Visualize**; drag-and-drop diagram editor with live sync to the extracted model
+4. **Generate**; export clean state machine code in Swift, Kotlin, TypeScript, Go, or Rust
 
 ---
 
