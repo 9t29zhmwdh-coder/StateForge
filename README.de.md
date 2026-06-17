@@ -6,7 +6,7 @@
 
 [🇬🇧 English Version](README.md)
 
-**Automatische State-Machine-Generierung aus Code, Logs und UI-Flows — entwickelt mit Rust + Tauri.**
+**Automatische State-Machine-Generierung aus Code, Logs und UI-Flows, entwickelt mit Rust und Tauri.**
 
 StateForge extrahiert automatisch State Machines aus Quellcode, Log-Dateien, API-Sequenzen oder natürlichsprachigen Beschreibungen und stellt diese als interaktive Diagramme dar. Es hilft, komplexe Abläufe zu verstehen, automatisch zu dokumentieren und sauberen State-Machine-Code in der Zielsprache zu regenerieren.
 
@@ -25,7 +25,7 @@ StateForge extrahiert automatisch State Machines aus Quellcode, Log-Dateien, API
 | **Log-Analyzer** | Rekonstruiert Zustandsflüsse aus Log-Dateien (JSON, Plaintext, Nginx, Syslog) |
 | **Diagramm-Engine** | Rendert Mermaid, GraphViz DOT, SVG, interaktives React Flow |
 | **Code-Generator** | Generiert idiomatischen State-Machine-Code in 5 Sprachen |
-| **KI-Integration** | Claude / Ollama — Maschinen anreichern oder aus Beschreibung erstellen |
+| **KI-Integration** | Claude / Ollama: Maschinen anreichern oder aus Beschreibung erstellen |
 | **Plugin-System** | Erweiterbar mit eigenen Parsern via Rust-Trait |
 
 ---
@@ -51,10 +51,10 @@ cargo tauri dev
 
 ### Verwendung
 
-1. **Importieren** — Quellcode einfügen, eine Log-Datei laden oder den Ablauf in natürlicher Sprache beschreiben
-2. **Analysieren** — StateForge extrahiert Zustände, Transitionen, Events und Guards automatisch
-3. **Visualisieren** — Drag-and-Drop-Diagrammeditor mit Live-Sync zum extrahierten Modell
-4. **Generieren** — Sauberen State-Machine-Code in Swift, Kotlin, TypeScript, Go oder Rust exportieren
+1. **Importieren**; Quellcode einfügen, eine Log-Datei laden oder den Ablauf in natürlicher Sprache beschreiben
+2. **Analysieren**; StateForge extrahiert Zustände, Transitionen, Events und Guards automatisch
+3. **Visualisieren**; Drag-and-Drop-Diagrammeditor mit Live-Sync zum extrahierten Modell
+4. **Generieren**; Sauberen State-Machine-Code in Swift, Kotlin, TypeScript, Go oder Rust exportieren
 
 ---
 
