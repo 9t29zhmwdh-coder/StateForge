@@ -1,10 +1,10 @@
-# Privacy Policy — StateForge
+# Privacy Policy : StateForge
 
 ## Summary
 
 StateForge processes all data locally. No data ever leaves your device.
 
-## What We Collect
+## What I Collect
 
 **Nothing.** StateForge does not collect, store, transmit, or share any user data.
 
