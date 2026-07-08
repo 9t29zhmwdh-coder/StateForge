@@ -10,9 +10,17 @@
 
 StateForge automatically extracts state machines from source code, log files, API sequences, or natural language descriptions and visualizes them as interactive diagrams. It helps you understand complex flows, document them automatically, and regenerate clean state machine code in your target language.
 
-[![CI](https://github.com/9t29zhmwdh-coder/StateForge/actions/workflows/ci.yml/badge.svg)](https://github.com/9t29zhmwdh-coder/StateForge/actions) ![Platform](https://img.shields.io/badge/Platform-macOS_%7C_Windows_%7C_Ubuntu-lightgrey) ![Rust](https://img.shields.io/badge/Rust-CE422B?logo=rust&logoColor=white) ![Tauri](https://img.shields.io/badge/Tauri-24C8D8?logo=tauri&logoColor=white) ![AI | Claude Code](https://img.shields.io/badge/AI-Claude_Code-black?logo=anthropic&logoColor=white) ![AI | Copilot](https://img.shields.io/badge/AI-Copilot-black?logo=github&logoColor=white) ![AI | Ollama](https://img.shields.io/badge/AI-Ollama-black?logo=ollama&logoColor=white)
+[![CI](https://github.com/9t29zhmwdh-coder/StateForge/actions/workflows/ci.yml/badge.svg)](https://github.com/9t29zhmwdh-coder/StateForge/actions) ![Platform](https://img.shields.io/badge/Platform-macOS_%7C_Windows_%7C_Ubuntu-lightgrey) ![Rust](https://img.shields.io/badge/Rust-CE422B?logo=rust&logoColor=white) ![Tauri](https://img.shields.io/badge/Tauri-24C8D8?logo=tauri&logoColor=white) ![AI | Claude Code](https://img.shields.io/badge/AI-Claude_Code-black?logo=anthropic&logoColor=white) ![AI | Copilot](https://img.shields.io/badge/AI-Copilot-black?logo=github&logoColor=white) ![AI | Claude](https://img.shields.io/badge/AI-Claude-black?logo=anthropic&logoColor=white)
+
+> **How it runs:** StateForge is a native desktop app, not a server or browser tool. It opens as its own window and has no tray icon or background service; it only extracts and renders while the window is open.
+
+![StateForge](docs/screenshot.png)
 
 ---
+
+StateForge's UI is available in English (default) and German; switch anytime with the language toggle.
+
+**In practice:** you paste source code, a log file, or a natural-language description, StateForge extracts a state machine model and renders it as an interactive diagram you can edit, then export as Mermaid, DOT, SVG, or generated code in five languages.
 
 ## Features
 
@@ -22,8 +30,10 @@ StateForge automatically extracts state machines from source code, log files, AP
 | **Log Analyzer** | Reconstructs state flows from log files (JSON, plaintext, nginx, syslog) |
 | **Diagram Engine** | Renders Mermaid, GraphViz DOT, SVG, interactive React Flow |
 | **Code Generator** | Generates idiomatic state machine code in 5 languages |
-| **AI Integration** | Local AI (Ollama): enhance machines or create from natural language |
+| **AI Integration** | Claude (Anthropic API): enhance machines or create from natural language |
 | **Plugin System** | Extend with custom parsers via Rust trait |
+
+> **Note:** Settings includes an Ollama option and an "Auto AI Enhance" toggle, but neither is wired up yet; AI features currently always use Claude regardless of the backend setting, and enhancement is always manual (see [ROADMAP.md](ROADMAP.md)).
 
 ---
 
@@ -32,6 +42,7 @@ StateForge automatically extracts state machines from source code, log files, AP
 - [Rust](https://rustup.rs/) 1.77+
 - [Node.js](https://nodejs.org/) 20+
 - [Tauri CLI v2](https://tauri.app/): `cargo install tauri-cli`
+- An [Anthropic API key](https://console.anthropic.com/) (only needed for the AI enhance/generate-from-description features)
 - macOS / Windows / Linux
 
 ---
@@ -52,6 +63,16 @@ cargo tauri dev
 2. **Analyze**; StateForge extracts states, transitions, events, and guards automatically
 3. **Visualize**; drag-and-drop diagram editor with live sync to the extracted model
 4. **Generate**; export clean state machine code in Swift, Kotlin, TypeScript, Go, or Rust
+
+---
+
+## Uninstall / Cleanup
+
+- Delete the app bundle
+- Remove the local database: platform-specific app data directory (`stateforge.db`), resolved via Tauri's `app_data_dir`
+- Remove the stored API key from Keychain Access.app (search for "stateforge")
+
+No other files or background services are left behind.
 
 ---
 
