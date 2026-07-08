@@ -3,12 +3,14 @@ import { CodePanel } from './CodePanel'
 import { DiagramEditor } from './DiagramEditor'
 import { useMachineStore } from '../../stores/machineStore'
 import { api, type StateMachine } from '../../lib/tauri'
+import { useT } from '../../lib/i18n'
 
 type DiagramFmt = 'flow' | 'mermaid' | 'svg'
 
 export function SplitView() {
-  const { active, setActive, machines, setMachines, diagram, diagramFormat, setDiagram } = useMachineStore()
+  const { active, setActive, machines, setMachines, diagram, setDiagram } = useMachineStore()
   const [fmt, setFmt] = useState<DiagramFmt>('flow')
+  const t = useT()
   const [mermaidHtml, setMermaidHtml] = useState('')
 
   const handleParsed = async (m: StateMachine) => {
@@ -41,7 +43,7 @@ export function SplitView() {
       {/* Left: Code Input */}
       <div className="w-[420px] flex-shrink-0 border-r border-[#30363d] flex flex-col">
         <div className="px-4 py-2 border-b border-[#30363d] flex items-center justify-between">
-          <span className="text-xs font-semibold text-[#8b949e] uppercase tracking-wider">Eingabe</span>
+          <span className="text-xs font-semibold text-[#8b949e] uppercase tracking-wider">{t('split.input')}</span>
           {active && (
             <span className="text-xs text-[#58a6ff] truncate max-w-[180px]">{active.name}</span>
           )}
@@ -54,7 +56,7 @@ export function SplitView() {
       {/* Right: Diagram */}
       <div className="flex-1 flex flex-col">
         <div className="px-4 py-2 border-b border-[#30363d] flex items-center gap-3">
-          <span className="text-xs font-semibold text-[#8b949e] uppercase tracking-wider">Diagramm</span>
+          <span className="text-xs font-semibold text-[#8b949e] uppercase tracking-wider">{t('split.diagram')}</span>
           <div className="flex gap-1">
             {(['flow', 'mermaid', 'svg'] as const).map(f => (
               <button
@@ -66,7 +68,7 @@ export function SplitView() {
                     : 'text-[#8b949e] hover:text-[#e6edf3] hover:bg-[#21262d]'
                 }`}
               >
-                {f === 'flow' ? 'Interaktiv' : f.toUpperCase()}
+                {f === 'flow' ? t('split.interactive') : f.toUpperCase()}
               </button>
             ))}
           </div>
@@ -81,7 +83,7 @@ export function SplitView() {
               }}
               className="ml-auto text-xs text-[#8b949e] hover:text-[#e6edf3] px-2 py-0.5 hover:bg-[#21262d] rounded"
             >
-              Export
+              {t('split.export')}
             </button>
           )}
         </div>
@@ -103,7 +105,7 @@ export function SplitView() {
                 <div dangerouslySetInnerHTML={{ __html: diagram }} className="[&>svg]:max-w-full" />
               ) : (
                 <div className="flex items-center justify-center h-full text-[#8b949e] text-sm">
-                  Keine Maschine geladen
+                  {t('split.noMachineLoaded')}
                 </div>
               )}
             </div>

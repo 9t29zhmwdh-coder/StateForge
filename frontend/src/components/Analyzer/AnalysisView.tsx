@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react'
 import { useMachineStore } from '../../stores/machineStore'
 import { api, type MachineAnalysis } from '../../lib/tauri'
+import { useT } from '../../lib/i18n'
 
 export function AnalysisView() {
   const { active, updateMachine } = useMachineStore()
   const [analysis, setAnalysis] = useState<MachineAnalysis | null>(null)
   const [enhancing, setEnhancing] = useState(false)
   const [error, setError] = useState('')
+  const t = useT()
 
   useEffect(() => {
     if (!active) return
@@ -29,7 +31,7 @@ export function AnalysisView() {
   if (!active) {
     return (
       <div className="flex items-center justify-center h-full text-[#8b949e]">
-        Keine State Machine ausgewählt
+        {t('analysis.noMachineSelected')}
       </div>
     )
   }
@@ -41,18 +43,18 @@ export function AnalysisView() {
       {/* Stats */}
       {analysis && (
         <div className="grid grid-cols-2 gap-3 mb-6">
-          <Stat label="Zustände" value={analysis.state_count} />
-          <Stat label="Transitionen" value={analysis.transition_count} />
-          <Stat label="Deterministisch" value={analysis.is_deterministic ? 'Ja' : 'Nein'}
+          <Stat label={t('analysis.states')} value={analysis.state_count} />
+          <Stat label={t('analysis.transitions')} value={analysis.transition_count} />
+          <Stat label={t('analysis.deterministic')} value={analysis.is_deterministic ? t('analysis.yes') : t('analysis.no')}
             color={analysis.is_deterministic ? 'text-[#3fb950]' : 'text-[#f85149]'} />
-          <Stat label="Initialzustand" value={analysis.has_initial_state ? 'Vorhanden' : 'Fehlt'}
+          <Stat label={t('analysis.initialState')} value={analysis.has_initial_state ? t('analysis.present') : t('analysis.missing')}
             color={analysis.has_initial_state ? 'text-[#3fb950]' : 'text-[#d29922]'} />
         </div>
       )}
 
       {/* States list */}
       <section className="mb-6">
-        <h3 className="text-sm font-semibold text-[#8b949e] uppercase tracking-wider mb-3">Zustände</h3>
+        <h3 className="text-sm font-semibold text-[#8b949e] uppercase tracking-wider mb-3">{t('analysis.states')}</h3>
         <div className="space-y-1">
           {active.states.map(s => (
             <div key={s.id} className="flex items-center gap-3 px-3 py-2 bg-[#161b22] rounded-md border border-[#30363d]">
@@ -69,15 +71,15 @@ export function AnalysisView() {
 
       {/* Transitions list */}
       <section className="mb-6">
-        <h3 className="text-sm font-semibold text-[#8b949e] uppercase tracking-wider mb-3">Transitionen</h3>
+        <h3 className="text-sm font-semibold text-[#8b949e] uppercase tracking-wider mb-3">{t('analysis.transitions')}</h3>
         <div className="space-y-1">
-          {active.transitions.map(t => (
-            <div key={t.id} className="flex items-center gap-2 px-3 py-2 bg-[#161b22] rounded-md border border-[#30363d] text-sm font-mono">
-              <span className="text-[#8b949e]">{t.from_state}</span>
+          {active.transitions.map(tr => (
+            <div key={tr.id} className="flex items-center gap-2 px-3 py-2 bg-[#161b22] rounded-md border border-[#30363d] text-sm font-mono">
+              <span className="text-[#8b949e]">{tr.from_state}</span>
               <span className="text-[#30363d]">→</span>
-              <span className="text-[#e6edf3]">{t.to_state}</span>
-              {t.event && <span className="ml-auto text-xs text-[#58a6ff]">[{t.event}]</span>}
-              {t.guard && <span className="text-xs text-[#d29922]">{'{'}guard{'}'}</span>}
+              <span className="text-[#e6edf3]">{tr.to_state}</span>
+              {tr.event && <span className="ml-auto text-xs text-[#58a6ff]">[{tr.event}]</span>}
+              {tr.guard && <span className="text-xs text-[#d29922]">{'{'}guard{'}'}</span>}
             </div>
           ))}
         </div>
@@ -86,7 +88,7 @@ export function AnalysisView() {
       {/* Warnings */}
       {analysis && analysis.unreachable_states.length > 0 && (
         <section className="mb-6 p-3 bg-[#2d1b00] border border-[#d29922] rounded-md">
-          <div className="text-xs font-semibold text-[#d29922] mb-2">Nicht erreichbare Zustände</div>
+          <div className="text-xs font-semibold text-[#d29922] mb-2">{t('analysis.unreachableStates')}</div>
           {analysis.unreachable_states.map(s => (
             <div key={s} className="text-xs font-mono text-[#e6edf3]">{s}</div>
           ))}
@@ -96,7 +98,7 @@ export function AnalysisView() {
       {/* AI Summary */}
       {active.ai_summary && (
         <section className="mb-6 p-4 bg-[#161b22] border border-[#30363d] rounded-md">
-          <div className="text-xs font-semibold text-[#8b949e] uppercase tracking-wider mb-2">AI-Zusammenfassung</div>
+          <div className="text-xs font-semibold text-[#8b949e] uppercase tracking-wider mb-2">{t('analysis.aiSummary')}</div>
           <p className="text-sm text-[#e6edf3]">{active.ai_summary}</p>
         </section>
       )}
@@ -108,7 +110,7 @@ export function AnalysisView() {
         disabled={enhancing}
         className="w-full py-2.5 bg-[#6e40c9] hover:bg-[#8957e5] disabled:opacity-50 text-white text-sm rounded-md transition-colors"
       >
-        {enhancing ? 'AI analysiert…' : 'Mit AI anreichern'}
+        {enhancing ? t('analysis.analyzing') : t('analysis.enhanceWithAi')}
       </button>
     </div>
   )

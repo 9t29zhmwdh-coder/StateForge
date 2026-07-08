@@ -59,9 +59,6 @@ pub async fn update_machine_from_graph(
     graph: DiagramGraph,
     state: State<'_, AppState>,
 ) -> Result<StateMachine> {
-    use sf_core::models::{State as MState, Transition, StateKind, TransitionKind};
-    use sf_core::models::diagram::NodeKind;
-
     let mut sm = sf_core::db::queries::get_machine(&state.pool, &machine_id).await?
         .ok_or_else(|| crate::error::SfError::Other("Not found".to_string()))?;
 

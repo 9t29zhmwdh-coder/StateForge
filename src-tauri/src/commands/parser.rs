@@ -11,7 +11,7 @@ pub async fn parse_code(
     state: State<'_, AppState>,
 ) -> Result<StateMachine> {
     let lang = lang_from_str(&language);
-    let mut sm = match source_path {
+    let sm = match source_path {
         Some(ref path) => sf_core::parser::parse_file(path, &content)?,
         None => sf_core::parser::parse_with_language(&content, lang)?,
     };

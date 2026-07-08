@@ -1,0 +1,12 @@
+{
+  "db_name": "SQLite",
+  "query": "INSERT OR REPLACE INTO state_machines\n         (id, name, source_json, states_json, transitions_json, initial_state, context_type, tags_json, ai_summary, created_at, updated_at)\n         VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11)",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 11
+    },
+    "nullable": []
+  },
+  "hash": "10f5e6e9d9565c91155e2e39b407ed083a1f7a47de7243e594081638886a460b"
+}

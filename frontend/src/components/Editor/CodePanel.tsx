@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { api, type StateMachine } from '../../lib/tauri'
+import { useT } from '../../lib/i18n'
 
 const LANGUAGES = ['swift', 'kotlin', 'typescript', 'go', 'rust'] as const
 type Lang = typeof LANGUAGES[number]
@@ -15,6 +16,7 @@ export function CodePanel({ onParsed }: Props) {
   const [error, setError] = useState('')
   const [aiDesc, setAiDesc] = useState('')
   const [mode, setMode] = useState<'code' | 'log' | 'ai'>('code')
+  const t = useT()
 
   const detectLang = async (content: string) => {
     if (content.length < 20) return
@@ -67,7 +69,7 @@ export function CodePanel({ onParsed }: Props) {
                 : 'border-transparent text-[#8b949e] hover:text-[#e6edf3]'
             }`}
           >
-            {m === 'code' ? 'Quellcode' : m === 'log' ? 'Log-Datei' : 'AI-Beschreibung'}
+            {m === 'code' ? t('codePanel.code') : m === 'log' ? t('codePanel.log') : t('codePanel.ai')}
           </button>
         ))}
       </div>
@@ -77,7 +79,7 @@ export function CodePanel({ onParsed }: Props) {
           <textarea
             value={aiDesc}
             onChange={e => setAiDesc(e.target.value)}
-            placeholder="Beschreibe deine State Machine auf Deutsch oder Englisch…&#10;z.B.: Eine Authentifizierungsmaschine mit den Zuständen Idle, Loading, Authenticated und Error."
+            placeholder={t('codePanel.aiPlaceholder')}
             className="flex-1 bg-[#161b22] border border-[#30363d] rounded-md p-3 text-sm text-[#e6edf3] font-mono resize-none focus:outline-none focus:border-[#58a6ff] placeholder-[#484f58]"
           />
           {error && <div className="text-xs text-[#f85149] px-1">{error}</div>}
@@ -86,14 +88,14 @@ export function CodePanel({ onParsed }: Props) {
             disabled={loading || !aiDesc.trim()}
             className="px-4 py-2 bg-[#6e40c9] hover:bg-[#8957e5] disabled:opacity-50 text-white text-sm rounded-md transition-colors"
           >
-            {loading ? 'Generiere…' : 'Mit AI generieren'}
+            {loading ? t('codePanel.generating') : t('codePanel.generateWithAi')}
           </button>
         </div>
       ) : (
         <div className="flex flex-col h-full">
           {mode === 'code' && (
             <div className="flex items-center gap-2 px-4 py-2 border-b border-[#30363d]">
-              <span className="text-xs text-[#8b949e]">Sprache:</span>
+              <span className="text-xs text-[#8b949e]">{t('codePanel.language')}</span>
               {LANGUAGES.map(l => (
                 <button
                   key={l}
@@ -112,7 +114,7 @@ export function CodePanel({ onParsed }: Props) {
           <textarea
             value={code}
             onChange={e => { setCode(e.target.value); detectLang(e.target.value) }}
-            placeholder={mode === 'log' ? 'Log-Inhalt hier einfügen…' : `${lang}-Code hier einfügen…`}
+            placeholder={mode === 'log' ? t('codePanel.logPlaceholder') : `${lang}${t('codePanel.codePlaceholderSuffix')}`}
             className="flex-1 bg-[#0d1117] border-0 p-4 text-sm text-[#e6edf3] font-mono resize-none focus:outline-none placeholder-[#484f58]"
             spellCheck={false}
           />
@@ -123,7 +125,7 @@ export function CodePanel({ onParsed }: Props) {
               disabled={loading || !code.trim()}
               className="w-full py-2 bg-[#238636] hover:bg-[#2ea043] disabled:opacity-50 text-white text-sm rounded-md transition-colors"
             >
-              {loading ? 'Analysiere…' : 'State Machine extrahieren'}
+              {loading ? t('codePanel.analyzing') : t('codePanel.extractMachine')}
             </button>
           </div>
         </div>
