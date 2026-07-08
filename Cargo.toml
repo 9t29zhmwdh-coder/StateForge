@@ -4,8 +4,8 @@ resolver = "2"
 
 [workspace.package]
 edition = "2021"
-version = "0.1.0"
-authors = ["RayStudio — Rafael Yilmaz"]
+version = "0.1.1"
+authors = ["RayStudio, Rafael Yilmaz"]
 license = "MIT"
 
 [workspace.dependencies]
