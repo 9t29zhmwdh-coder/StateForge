@@ -1,5 +1,5 @@
 use tauri::State;
-use sf_core::models::{StateMachine, State as MState, Transition, StateKind, TransitionKind};
+use sf_core::models::{StateMachine, State as MState, Transition, StateKind};
 use crate::state::AppState;
 use crate::error::Result;
 

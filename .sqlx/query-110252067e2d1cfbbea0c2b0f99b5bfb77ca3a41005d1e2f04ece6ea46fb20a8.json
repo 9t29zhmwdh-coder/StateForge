@@ -1,0 +1,80 @@
+{
+  "db_name": "SQLite",
+  "query": "SELECT id, name, source_json, states_json, transitions_json, initial_state,\n                context_type, tags_json, ai_summary, created_at, updated_at\n         FROM state_machines ORDER BY updated_at DESC",
+  "describe": {
+    "columns": [
+      {
+        "name": "id",
+        "ordinal": 0,
+        "type_info": "Text"
+      },
+      {
+        "name": "name",
+        "ordinal": 1,
+        "type_info": "Text"
+      },
+      {
+        "name": "source_json",
+        "ordinal": 2,
+        "type_info": "Text"
+      },
+      {
+        "name": "states_json",
+        "ordinal": 3,
+        "type_info": "Text"
+      },
+      {
+        "name": "transitions_json",
+        "ordinal": 4,
+        "type_info": "Text"
+      },
+      {
+        "name": "initial_state",
+        "ordinal": 5,
+        "type_info": "Text"
+      },
+      {
+        "name": "context_type",
+        "ordinal": 6,
+        "type_info": "Text"
+      },
+      {
+        "name": "tags_json",
+        "ordinal": 7,
+        "type_info": "Text"
+      },
+      {
+        "name": "ai_summary",
+        "ordinal": 8,
+        "type_info": "Text"
+      },
+      {
+        "name": "created_at",
+        "ordinal": 9,
+        "type_info": "Text"
+      },
+      {
+        "name": "updated_at",
+        "ordinal": 10,
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Right": 0
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      true,
+      false,
+      true,
+      false,
+      false
+    ]
+  },
+  "hash": "110252067e2d1cfbbea0c2b0f99b5bfb77ca3a41005d1e2f04ece6ea46fb20a8"
+}

@@ -16,7 +16,7 @@ reqwest      = { workspace = true }
 regex        = { workspace = true }
 once_cell    = { workspace = true }
 
-sqlx         = { version = "0.8", features = ["sqlite", "runtime-tokio", "chrono", "uuid", "migrate"] }
+sqlx         = { workspace = true }
 dashmap      = "6"
 keyring      = "3"
 async-trait  = "0.1"

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { api, type AppSettings } from '../../lib/tauri'
+import { useT } from '../../lib/i18n'
 
 export function SettingsView() {
   const { settings, hasKey, setSettings, setHasKey } = useSettingsStore()
@@ -9,6 +10,7 @@ export function SettingsView() {
   const [saved, setSaved] = useState(false)
   const [keySaved, setKeySaved] = useState(false)
   const [error, setError] = useState('')
+  const t = useT()
 
   const set = <K extends keyof AppSettings>(k: K, v: AppSettings[K]) =>
     setDraft(d => ({ ...d, [k]: v }))
@@ -41,11 +43,11 @@ export function SettingsView() {
 
   return (
     <div className="p-6 max-w-lg mx-auto overflow-y-auto h-full">
-      <h2 className="text-lg font-semibold text-[#e6edf3] mb-6">Einstellungen</h2>
+      <h2 className="text-lg font-semibold text-[#e6edf3] mb-6">{t('settings.title')}</h2>
 
       {/* AI Backend */}
-      <Section title="KI-Backend">
-        <Label>Backend</Label>
+      <Section title={t('settings.aiBackend')}>
+        <Label>{t('settings.backend')}</Label>
         <div className="flex gap-2 mb-4">
           {['claude', 'ollama'].map(b => (
             <button
@@ -64,13 +66,13 @@ export function SettingsView() {
 
         {draft.ai_backend === 'claude' && (
           <>
-            <Label>Claude API-Schlüssel</Label>
+            <Label>{t('settings.claudeApiKey')}</Label>
             <div className="flex gap-2">
               <input
                 type="password"
                 value={apiKey}
                 onChange={e => setApiKey(e.target.value)}
-                placeholder={hasKey ? '••••••••••••• (gesetzt)' : 'sk-ant-…'}
+                placeholder={hasKey ? t('settings.setPlaceholder') : 'sk-ant-...'}
                 className="flex-1 bg-[#161b22] border border-[#30363d] rounded-md px-3 py-1.5 text-sm text-[#e6edf3] focus:outline-none focus:border-[#58a6ff] placeholder-[#484f58]"
               />
               <button
@@ -78,26 +80,26 @@ export function SettingsView() {
                 disabled={!apiKey.trim()}
                 className="px-3 py-1.5 text-sm bg-[#238636] hover:bg-[#2ea043] disabled:opacity-50 text-white rounded-md transition-colors"
               >
-                {keySaved ? 'Gespeichert!' : 'Sichern'}
+                {keySaved ? t('settings.saved') : t('settings.save')}
               </button>
             </div>
-            <p className="text-xs text-[#8b949e] mt-1">Wird im System-Keychain gespeichert.</p>
+            <p className="text-xs text-[#8b949e] mt-1">{t('settings.keychainNote')}</p>
           </>
         )}
 
         {draft.ai_backend === 'ollama' && (
           <>
-            <Label>Ollama URL</Label>
+            <Label>{t('settings.ollamaUrl')}</Label>
             <Input value={draft.ollama_url} onChange={v => set('ollama_url', v)} />
-            <Label>Modell</Label>
+            <Label>{t('settings.model')}</Label>
             <Input value={draft.ollama_model} onChange={v => set('ollama_model', v)} placeholder="llama3" />
           </>
         )}
       </Section>
 
       {/* Diagram */}
-      <Section title="Diagramm">
-        <Label>Standard-Format</Label>
+      <Section title={t('settings.diagram')}>
+        <Label>{t('settings.defaultFormat')}</Label>
         <div className="flex gap-2 mb-4">
           {['mermaid', 'graphviz', 'svg'].map(f => (
             <button
@@ -114,7 +116,7 @@ export function SettingsView() {
           ))}
         </div>
 
-        <Label>Auto-AI-Anreicherung</Label>
+        <Label>{t('settings.autoAiEnhance')}</Label>
         <div className="flex items-center gap-3">
           <button
             onClick={() => set('auto_ai_enhance', !draft.auto_ai_enhance)}
@@ -127,7 +129,7 @@ export function SettingsView() {
             }`} />
           </button>
           <span className="text-sm text-[#8b949e]">
-            {draft.auto_ai_enhance ? 'Aktiv' : 'Inaktiv'}
+            {draft.auto_ai_enhance ? t('settings.active') : t('settings.inactive')}
           </span>
         </div>
       </Section>
@@ -138,7 +140,7 @@ export function SettingsView() {
         onClick={handleSave}
         className="w-full py-2.5 bg-[#238636] hover:bg-[#2ea043] text-white text-sm rounded-md transition-colors"
       >
-        {saved ? 'Gespeichert!' : 'Einstellungen speichern'}
+        {saved ? t('settings.saved') : t('settings.saveSettings')}
       </button>
     </div>
   )

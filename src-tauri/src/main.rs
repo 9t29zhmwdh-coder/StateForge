@@ -17,18 +17,14 @@ fn main() {
         .init();
 
     tauri::Builder::default()
-        .plugin(tauri_plugin_shell::init())
-        .plugin(tauri_plugin_dialog::init())
-        .plugin(tauri_plugin_fs::init())
         .setup(|app| {
             let data_dir = app.path().app_data_dir().unwrap();
             std::fs::create_dir_all(&data_dir).unwrap();
             let db_path = data_dir.join("stateforge.db");
 
-            let rt = tokio::runtime::Handle::current();
-            let pool = rt.block_on(sf_core::db::open(&db_path)).unwrap();
+            let pool = tauri::async_runtime::block_on(sf_core::db::open(&db_path)).unwrap();
 
-            let settings_json = rt.block_on(sf_core::db::queries::get_setting(&pool, "app_settings"))
+            let settings_json = tauri::async_runtime::block_on(sf_core::db::queries::get_setting(&pool, "app_settings"))
                 .unwrap_or(None);
             let settings: AppSettings = settings_json
                 .and_then(|s| serde_json::from_str(&s).ok())

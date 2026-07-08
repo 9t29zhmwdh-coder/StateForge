@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useMachineStore } from '../../stores/machineStore'
 import { api } from '../../lib/tauri'
+import { useT } from '../../lib/i18n'
 
 const TARGETS = [
   { id: 'swift',      label: 'Swift',      desc: 'enum + Reducer' },
@@ -16,6 +17,7 @@ export function GeneratorView() {
   const [code, setCode] = useState('')
   const [loading, setLoading] = useState(false)
   const [copied, setCopied] = useState(false)
+  const t = useT()
 
   const generate = async () => {
     if (!active) return
@@ -24,7 +26,7 @@ export function GeneratorView() {
       const result = await api.generateCode(active.id, target)
       setCode(result)
     } catch (e) {
-      setCode(`// Fehler: ${String(e)}`)
+      setCode(`${t('generator.errorPrefix')} ${String(e)}`)
     } finally {
       setLoading(false)
     }
@@ -55,7 +57,7 @@ export function GeneratorView() {
   if (!active) {
     return (
       <div className="flex items-center justify-center h-full text-[#8b949e]">
-        Keine State Machine ausgewählt
+        {t('generator.noMachineSelected')}
       </div>
     )
   }
@@ -64,20 +66,20 @@ export function GeneratorView() {
     <div className="flex flex-col h-full">
       {/* Target selector */}
       <div className="flex items-center gap-4 px-6 py-3 border-b border-[#30363d]">
-        <span className="text-xs text-[#8b949e] uppercase tracking-wider">Zielsprache:</span>
+        <span className="text-xs text-[#8b949e] uppercase tracking-wider">{t('generator.targetLanguage')}</span>
         <div className="flex gap-2">
-          {TARGETS.map(t => (
+          {TARGETS.map(target_ => (
             <button
-              key={t.id}
-              onClick={() => setTarget(t.id)}
-              title={t.desc}
+              key={target_.id}
+              onClick={() => setTarget(target_.id)}
+              title={target_.desc}
               className={`px-3 py-1 text-xs rounded transition-colors ${
-                target === t.id
+                target === target_.id
                   ? 'bg-[#1f6feb] text-white'
                   : 'text-[#8b949e] hover:text-[#e6edf3] bg-[#161b22] hover:bg-[#21262d]'
               }`}
             >
-              {t.label}
+              {target_.label}
             </button>
           ))}
         </div>
@@ -86,13 +88,13 @@ export function GeneratorView() {
             onClick={handleCopy}
             className="px-3 py-1 text-xs text-[#8b949e] hover:text-[#e6edf3] bg-[#161b22] hover:bg-[#21262d] rounded transition-colors"
           >
-            {copied ? 'Kopiert!' : 'Kopieren'}
+            {copied ? t('generator.copied') : t('generator.copy')}
           </button>
           <button
             onClick={handleDownload}
             className="px-3 py-1 text-xs text-[#8b949e] hover:text-[#e6edf3] bg-[#161b22] hover:bg-[#21262d] rounded transition-colors"
           >
-            Download
+            {t('generator.download')}
           </button>
         </div>
       </div>
@@ -100,10 +102,10 @@ export function GeneratorView() {
       {/* Code output */}
       <div className="flex-1 overflow-auto">
         {loading ? (
-          <div className="flex items-center justify-center h-full text-[#8b949e] text-sm">Generiere…</div>
+          <div className="flex items-center justify-center h-full text-[#8b949e] text-sm">{t('generator.generating')}</div>
         ) : (
           <pre className="p-6 text-sm font-mono text-[#e6edf3] whitespace-pre-wrap leading-relaxed">
-            {code || '// Code wird generiert…'}
+            {code || t('generator.generatingComment')}
           </pre>
         )}
       </div>

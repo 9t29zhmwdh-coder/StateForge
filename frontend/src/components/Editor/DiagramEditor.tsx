@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useRef } from 'react'
+import { useEffect, useCallback, useState } from 'react'
 import {
   ReactFlow, Background, Controls, MiniMap, Panel,
   addEdge, applyNodeChanges, applyEdgeChanges,
@@ -7,6 +7,7 @@ import {
 import '@xyflow/react/dist/style.css'
 import { useMachineStore } from '../../stores/machineStore'
 import { api, type DiagramGraph, type DiagramNode, type DiagramEdge } from '../../lib/tauri'
+import { useT } from '../../lib/i18n'
 
 function toFlowNodes(nodes: DiagramNode[]): Node[] {
   return nodes.map(n => ({
@@ -52,25 +53,9 @@ function edgeStyle(kind: string): React.CSSProperties {
 
 export function DiagramEditor() {
   const { active, graph, setGraph, updateMachine } = useMachineStore()
-  const nodesRef = useRef<Node[]>([])
-  const edgesRef = useRef<Edge[]>([])
-
-  const [nodes, setNodes] = [
-    nodesRef.current,
-    (v: Node[] | ((p: Node[]) => Node[])) => {
-      nodesRef.current = typeof v === 'function' ? v(nodesRef.current) : v
-    }
-  ]
-  const [edges, setEdges] = [
-    edgesRef.current,
-    (v: Edge[] | ((p: Edge[]) => Edge[])) => {
-      edgesRef.current = typeof v === 'function' ? v(edgesRef.current) : v
-    }
-  ]
-
-  // Use proper React state
-  const [flowNodes, setFlowNodes] = [nodes, setNodes] as unknown as [Node[], React.Dispatch<React.SetStateAction<Node[]>>]
-  const [flowEdges, setFlowEdges] = [edges, setEdges] as unknown as [Edge[], React.Dispatch<React.SetStateAction<Edge[]>>]
+  const t = useT()
+  const [flowNodes, setFlowNodes] = useState<Node[]>([])
+  const [flowEdges, setFlowEdges] = useState<Edge[]>([])
 
   useEffect(() => {
     if (!active) return
@@ -115,7 +100,7 @@ export function DiagramEditor() {
   if (!active) {
     return (
       <div className="flex-1 flex items-center justify-center text-[#8b949e]">
-        Keine State Machine ausgewählt
+        {t('diagram.noMachineSelected')}
       </div>
     )
   }
@@ -139,7 +124,7 @@ export function DiagramEditor() {
               onClick={handleSave}
               className="px-3 py-1.5 text-xs bg-[#238636] hover:bg-[#2ea043] text-white rounded-md transition-colors"
             >
-              Speichern
+              {t('diagram.save')}
             </button>
           </div>
         </Panel>
