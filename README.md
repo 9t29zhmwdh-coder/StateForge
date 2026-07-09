@@ -18,6 +18,10 @@ StateForge automatically extracts state machines from source code, log files, AP
 
 ---
 
+> 🌱 New here? → [Step-by-step guide for beginners](GETTING_STARTED.md)
+
+---
+
 StateForge's UI is available in English (default) and German; switch anytime with the language toggle.
 
 **In practice:** you paste source code, a log file, or a natural-language description, StateForge extracts a state machine model and renders it as an interactive diagram you can edit, then export as Mermaid, DOT, SVG, or generated code in five languages.
@@ -44,8 +48,6 @@ StateForge's UI is available in English (default) and German; switch anytime wit
 - [Tauri CLI v2](https://tauri.app/): `cargo install tauri-cli`
 - An [Anthropic API key](https://console.anthropic.com/) (only needed for the AI enhance/generate-from-description features)
 - macOS / Windows / Linux
-
-> 🌱 New here? → [Step-by-step guide for beginners](GETTING_STARTED.md)
 
 ---
 
