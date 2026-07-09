@@ -45,6 +45,8 @@ StateForge's UI is available in English (default) and German; switch anytime wit
 - An [Anthropic API key](https://console.anthropic.com/) (only needed for the AI enhance/generate-from-description features)
 - macOS / Windows / Linux
 
+> 🌱 New here? → [Step-by-step guide for beginners](GETTING_STARTED.md)
+
 ---
 
 ## Quick Start
