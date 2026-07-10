@@ -18,6 +18,10 @@ StateForge extrahiert automatisch State Machines aus Quellcode, Log-Dateien, API
 
 ---
 
+> 🌱 Neu hier? → [Schritt-für-Schritt-Anleitung für Einsteiger](GETTING_STARTED.md)
+
+---
+
 Die Oberfläche von StateForge ist auf Englisch (Standard) und Deutsch verfügbar, umschaltbar über den Sprachtoggle.
 
 **In der Praxis:** du fügst Quellcode, eine Logdatei oder eine natürlichsprachige Beschreibung ein, StateForge extrahiert ein State-Machine-Modell und stellt es als interaktives Diagramm dar, das du bearbeiten und als Mermaid, DOT, SVG oder generierten Code in fünf Sprachen exportieren kannst.
