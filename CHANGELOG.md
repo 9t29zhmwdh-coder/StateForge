@@ -6,7 +6,13 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), [Semantic Vers
 
 ---
 
-## [0.1.4] - 2026-07-11
+## [0.2.4] - 2026-07-11
+
+### Fixed
+
+- SemVer correction: v0.1.1 added a genuine new feature (English/German UI translations with a language toggle) but was versioned as a patch. Renumbered v0.1.1 through v0.1.4 to v0.2.0 through v0.2.3 (same commits, tags and releases recreated at identical SHAs), per the portfolio's SemVer discipline (patch = fix, minor = feature, major = finished product).
+
+## [0.2.3] - 2026-07-11
 
 ### Added
 
@@ -16,13 +22,13 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), [Semantic Vers
 
 - Removed an em-dash from the SECURITY.md heading.
 
-## [0.1.3] - 2026-07-11
+## [0.2.2] - 2026-07-11
 
 ### Fixed
 
 - Updated actions/setup-node to its latest major version in CI, since GitHub is deprecating the Node.js 20 runtime and the previous version was being forced onto Node 24 and crashing during post-run cleanup.
 
-## [0.1.2] - 2026-07-10
+## [0.2.1] - 2026-07-10
 
 ### Fixed
 
@@ -32,7 +38,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), [Semantic Vers
 
 - Added the "New here?" beginner guide callout to README.de.md (was missing)
 
-## [0.1.1] - 2026-07-08
+## [0.2.0] - 2026-07-08
 
 ### Fixed
 
@@ -56,8 +62,6 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), [Semantic Vers
 
 - English (default) and German UI translations with a language toggle
 
-[0.1.1]: https://github.com/9t29zhmwdh-coder/StateForge/releases/tag/v0.1.1
-
 ## [0.1.0] - 2026-06-12
 
 ### Added
@@ -74,5 +78,3 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), [Semantic Vers
 - `sf-cli` binary for headless extraction and batch export
 - Tauri v2 desktop shell for macOS, Windows, and Linux
 - React/TypeScript frontend with Zustand state management
-
-[0.1.0]: https://github.com/9t29zhmwdh-coder/StateForge/releases/tag/v0.1.0
