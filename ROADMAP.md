@@ -48,3 +48,7 @@
 - Cloud storage or collaborative real-time editing
 - Runtime FSM execution engine (this is a visualization/documentation tool)
 - Mobile platforms (iOS, Android)
+
+## Dual-Licensing Readiness
+
+Assessed 2026-07-11: Community-only, not a Dual-Licensing candidate. StateForge's own roadmap already rules out cloud storage, collaborative real-time editing and UML enterprise tool integration by design, which are exactly the features enterprise diagram tools (Lucidchart, Miro) monetize around. It is a single-developer documentation/visualization tool with no team dimension. Revisit only if the project's scope intentionally changes toward collaborative editing.

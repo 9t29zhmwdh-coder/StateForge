@@ -1,4 +1,4 @@
-# Security Policy — StateForge
+# Security Policy: StateForge
 
 ## Supported Versions
 
