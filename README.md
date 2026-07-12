@@ -18,6 +18,10 @@ StateForge automatically extracts state machines from source code, log files, AP
 
 ---
 
+> 💾 **Download:** [macOS (DMG)](https://github.com/9t29zhmwdh-coder/StateForge/releases/latest/download/StateForge.dmg) · [Windows (Installer)](https://github.com/9t29zhmwdh-coder/StateForge/releases/latest/download/StateForge-Setup.exe) · [Linux (AppImage)](https://github.com/9t29zhmwdh-coder/StateForge/releases/latest/download/StateForge.AppImage): always the latest release, not code-signed/notarized (Gatekeeper/SmartScreen will warn on first run). Or build from source, see Getting Started below.
+
+---
+
 > 🌱 New here? → [Step-by-step guide for beginners](GETTING_STARTED.md)
 
 ---

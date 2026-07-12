@@ -6,6 +6,18 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), [Semantic Vers
 
 ---
 
+## [0.2.5] - 2026-07-12
+
+### Added
+
+- Release workflow (`release.yml`) producing installable cross-platform artifacts (dmg, exe, msi, deb, rpm, AppImage, plus stable-named copies for the README download links) on every `v*` tag push.
+- README download section (macOS DMG, Windows installer, Linux AppImage links) in both English and German.
+
+### Fixed
+
+- Pinned all GitHub Actions in `ci.yml` to a commit SHA instead of a mutable tag, per the portfolio's supply-chain integrity standard.
+- Bumped `vite`/`@vitejs/plugin-react` to major versions 8/6 to resolve a moderate/high-severity esbuild dev-server request-forwarding vulnerability (npm audit).
+
 ## [0.2.4] - 2026-07-11
 
 ### Fixed
