@@ -58,7 +58,7 @@ impl CodeParser for TypeScriptParser {
         let mut sm = StateMachine::new("TypeScriptStateMachine", source);
         let mut found_states = std::collections::HashMap::new();
 
-        // 1. XState createMachine — most structured
+        // 1. XState createMachine: most structured
         if let Some(cap) = XSTATE_MACHINE.captures(content) {
             sm.name = "XStateMachine".to_string();
             let states_body = &cap[1];

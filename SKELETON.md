@@ -1,4 +1,4 @@
-# StateForge — Professional Repo Skeleton
+# StateForge: Professional Repo Skeleton
 
 **Generated:** 2026-06-16 | **Earliest commit:** 2026-06-12 | **Release:** v0.1.0
 
@@ -56,7 +56,7 @@ StateForge/
 - CHANGELOG.md ✅
 - .github/ISSUE_TEMPLATE/ ✅
 - .github/PULL_REQUEST_TEMPLATE.md ✅
-- .github/workflows/ci.yml ⚠️ — requires `workflows` OAuth scope (run: gh auth refresh -s workflows)
+- .github/workflows/ci.yml ⚠️: requires `workflows` OAuth scope (run: gh auth refresh -s workflows)
 - GitHub Release v0.1.0 ✅
 
 ## CI Workflow (push manually after: gh auth refresh -s workflows)
@@ -104,10 +104,10 @@ jobs:
 
 ## Reusable from this repo
 
-- `sf-core/src/fsm/` — normalized `FsmModel` struct (states, transitions, guards, actions) reusable as a state machine primitive in other RayStudio tools that need FSM representation
-- `sf-core/src/exporter/mermaid/` — generic Mermaid `stateDiagram-v2` renderer, reusable wherever diagram output is needed
-- `CODE_OF_CONDUCT.md` — identical across all RayStudio repos, copy as-is
+- `sf-core/src/fsm/`: normalized `FsmModel` struct (states, transitions, guards, actions) reusable as a state machine primitive in other RayStudio tools that need FSM representation
+- `sf-core/src/exporter/mermaid/`: generic Mermaid `stateDiagram-v2` renderer, reusable wherever diagram output is needed
+- `CODE_OF_CONDUCT.md`: identical across all RayStudio repos, copy as-is
 
 ---
 
-*StateForge — RayStudio · Rafael Yilmaz · MIT License · 2026*
+*StateForge, RayStudio · Rafael Yilmaz · MIT License · 2026*
