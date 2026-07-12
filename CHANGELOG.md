@@ -6,6 +6,12 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), [Semantic Vers
 
 ---
 
+## [0.2.6] - 2026-07-12
+
+### Fixed
+
+- Removed 16 em-dashes from `ARCHITECTURE.md`, `CONTRIBUTING.md`, `SKELETON.md`, and a source comment in `crates/sf-core/src/parser/typescript.rs`. Swiss German orthography rule: no em-dash/en-dash anywhere in the repo.
+
 ## [0.2.5] - 2026-07-12
 
 ### Added
