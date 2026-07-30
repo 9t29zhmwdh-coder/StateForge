@@ -6,6 +6,20 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), [Semantic Vers
 
 ---
 
+## [1.0.8] - 2026-07-30
+
+### Security
+
+- `keyring` now names a platform backend for every target, so the Claude API key actually reaches the credential store of the operating system. It was declared without any platform feature, which compiles and raises no error but falls back to a store held in process memory. The key was gone after every restart, and `settings.rs` reads it with `.ok().and_then(...)`, so the loss was silent. This change reached `main` in 1.0.7 without a changelog entry of its own; recording it here rather than leaving it undocumented.
+
+### Added
+
+- A test that stores a secret and reads it back from a second process, on all three target platforms rather than macOS alone. StateForge ships `.dmg`, `.msi` and `.deb` artifacts, and each platform has its own backend that can be missing independently.
+- The test separates a missing service from a missing backend. The in-memory fallback never fails to write, so a write error proves a real backend is compiled in and only its service is absent, which is the normal state of a Linux CI runner without a D-Bus secret service. A write that succeeds while a second process finds nothing is the defect.
+- The second process is the test binary re-run, not `/usr/bin/security`. The keychain grants read access per application, so a different binary asking for an item it did not create raises an authorisation dialog that blocks CI and interrupts whoever is at the keyboard.
+
+---
+
 ## [1.0.7] - 2026-07-29
 
 ### Security
