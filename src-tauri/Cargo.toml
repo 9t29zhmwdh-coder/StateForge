@@ -24,7 +24,11 @@ anyhow     = { workspace = true }
 thiserror  = { workspace = true }
 tracing    = { workspace = true }
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
-keyring    = "3"
+# Ohne ein Plattform-Feature kompiliert keyring, speichert aber nichts:
+# es faellt auf einen Speicher im Prozessspeicher zurueck, den ein zweiter
+# Prozess nicht sieht. Zugangsdaten waren damit nach jedem Neustart weg,
+# ohne dass ein Fehler gemeldet wurde.
+keyring    = { version = "3", features = ["apple-native", "windows-native", "async-secret-service", "crypto-openssl", "tokio"] }
 dirs       = "5"
 sqlx       = { workspace = true }
 chrono     = { workspace = true }
