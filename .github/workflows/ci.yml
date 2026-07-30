@@ -16,8 +16,16 @@ permissions:
 
 jobs:
   check:
-    name: Check
-    runs-on: macos-latest
+    # Alle drei Zielplattformen, weil das Release fuer alle drei baut. Vorher lief
+    # nur macOS: ein Fehler, der nur unter Windows oder Linux auftritt, fiel erst
+    # beim Release auf, wenn ueberhaupt. Der Keychain-Backend ist genau so ein
+    # Fall, er kann pro Plattform unabhaengig fehlen.
+    name: Check (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: dtolnay/rust-toolchain@4be7066ada62dd38de10e7b70166bc74ed198c30 # stable
