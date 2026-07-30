@@ -11,6 +11,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), [Semantic Vers
 ### Changed
 
 - The `Check` job runs on Linux, macOS and Windows instead of macOS alone. The release builds artifacts for all three, so a fault that only shows on one of the other two reached a release before anything noticed. The keychain backend fixed in 1.0.8 is exactly that kind of fault: it can be absent per platform, independently of the others.
+- The Linux leg installs the GTK and WebKit packages that Tauri builds against. The runner does not ship them, so `cargo check` failed at `gobject-2.0` before reaching any code. The release workflow already installed the same packages, which is why releases worked while this job did not.
 - The ruleset now requires `Check (ubuntu-latest)`, `Check (macos-latest)` and `Check (windows-latest)` in place of the single `Check`. Adding a matrix renames the job, so leaving the old context required would have left a check that can never report again, which is how dependency pull requests were blocked here earlier this month.
 
 ---
