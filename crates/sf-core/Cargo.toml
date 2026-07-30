@@ -18,9 +18,20 @@ once_cell    = { workspace = true }
 
 sqlx         = { workspace = true }
 dashmap      = "6"
-keyring      = "3"
+# Ohne ein Plattform-Feature kompiliert keyring, speichert aber nichts:
+# es faellt auf einen Speicher im Prozessspeicher zurueck, den ein zweiter
+# Prozess nicht sieht. Zugangsdaten waren damit nach jedem Neustart weg,
+# ohne dass ein Fehler gemeldet wurde.
+keyring      = { version = "3", features = ["apple-native", "windows-native", "async-secret-service", "crypto-openssl", "tokio"] }
 async-trait  = "0.1"
 dirs         = "5"
 glob         = "0.3"
 petgraph     = "0.6"    # graph algorithms for FSM analysis
 indexmap     = { version = "2", features = ["serde"] }
+
+[dev-dependencies]
+# Ohne Features deklariert, mit Absicht: Cargo vereinigt Features ueber den
+# Graphen, und ein Feature hier wuerde den Backend auch dann aktivieren, wenn
+# die echte Abhaengigkeit ihn verliert. Der Test wuerde dann seine eigene
+# Konfiguration pruefen statt der der Anwendung.
+keyring = "3"
