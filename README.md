@@ -6,9 +6,21 @@
 
 [🇩🇪 Deutsche Version](README.de.md)
 
-**Automatic state machine generation from code, logs and UI flows, built with Rust and Tauri.**
+**Draws the state machine that is already in your code, so you can see the transition nobody documented.**
 
-StateForge automatically extracts state machines from source code, log files, API sequences, or natural language descriptions and visualizes them as interactive diagrams. It helps you understand complex flows, document them automatically, and regenerate clean state machine code in your target language.
+Every order status field is a state machine. Nobody drew it. It exists as
+scattered `if` branches and a `status` column, and the only way to know
+whether cancelled can go back to pending is to read every assignment in the
+file and hold them all in your head.
+
+Paste the source, a log file, an API sequence or a description in plain
+words. StateForge extracts the states and transitions and renders them as a
+diagram you can edit, then exports Mermaid, DOT, SVG, or generated code in
+five languages.
+
+**Not for you if** you are designing a new state machine. Write the Mermaid by
+hand; it is faster than a round trip through extraction. This earns its keep on
+code that already exists and nobody has drawn.
 
 [![CI](https://github.com/9t29zhmwdh-coder/StateForge/actions/workflows/ci.yml/badge.svg)](https://github.com/9t29zhmwdh-coder/StateForge/actions) [![CodeQL](https://github.com/9t29zhmwdh-coder/StateForge/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/9t29zhmwdh-coder/StateForge/security/code-scanning) [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/9t29zhmwdh-coder/StateForge/badge)](https://securityscorecards.dev/viewer/?uri=github.com/9t29zhmwdh-coder/StateForge) [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/13684/badge)](https://www.bestpractices.dev/projects/13684)
 

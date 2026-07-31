@@ -6,6 +6,14 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), [Semantic Vers
 
 ---
 
+## [1.0.11] - 2026-07-31
+
+### Changed
+
+- Both READMEs now open with a state machine everyone recognises, the order status field that exists only as scattered `if` branches and a `status` column, rather than with the extraction the app performs. A short paragraph says that designing a new state machine is faster done by writing the Mermaid by hand.
+
+---
+
 ## [1.0.10] - 2026-07-30
 
 ### Added

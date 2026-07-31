@@ -6,9 +6,22 @@
 
 [🇬🇧 English Version](README.md)
 
-**Automatische State-Machine-Generierung aus Code, Logs und UI-Flows, entwickelt mit Rust und Tauri.**
+**Zeichnet die State Machine, die längst in deinem Code steckt, damit du den Übergang siehst, den nie jemand dokumentiert hat.**
 
-StateForge extrahiert automatisch State Machines aus Quellcode, Log-Dateien, API-Sequenzen oder natürlichsprachigen Beschreibungen und stellt diese als interaktive Diagramme dar. Es hilft, komplexe Abläufe zu verstehen, automatisch zu dokumentieren und sauberen State-Machine-Code in der Zielsprache zu regenerieren.
+Jedes Bestellstatus-Feld ist eine State Machine. Gezeichnet hat sie niemand.
+Sie existiert als verstreute `if`-Zweige und eine `status`-Spalte, und ob
+storniert wieder zu offen werden kann, weisst du erst, wenn du jede Zuweisung
+in der Datei gelesen und gleichzeitig im Kopf hast.
+
+Quellcode einfügen, eine Logdatei, eine API-Sequenz oder eine Beschreibung in
+normalen Worten. StateForge zieht Zustände und Übergänge heraus und stellt sie
+als bearbeitbares Diagramm dar, exportierbar als Mermaid, DOT, SVG oder als
+generierter Code in fünf Sprachen.
+
+**Nichts für dich, wenn** du eine neue State Machine entwirfst. Dann schreibst
+du das Mermaid von Hand, das geht schneller als der Umweg über die Extraktion.
+Das hier zahlt sich bei Code aus, der schon da ist und den niemand gezeichnet
+hat.
 
 [![CI](https://github.com/9t29zhmwdh-coder/StateForge/actions/workflows/ci.yml/badge.svg)](https://github.com/9t29zhmwdh-coder/StateForge/actions) [![CodeQL](https://github.com/9t29zhmwdh-coder/StateForge/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/9t29zhmwdh-coder/StateForge/security/code-scanning) [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/9t29zhmwdh-coder/StateForge/badge)](https://securityscorecards.dev/viewer/?uri=github.com/9t29zhmwdh-coder/StateForge) [![OpenSSF Best Practices](https://www.bestpractices.dev/projects/13684/badge)](https://www.bestpractices.dev/projects/13684)
 
