@@ -6,6 +6,24 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), [Semantic Vers
 
 ---
 
+## [1.1.0] - 2026-07-31
+
+### Added
+
+- **A local AI backend that actually exists.** `OllamaAnalyzer` implements the same `AiAnalyzer` contract as the Claude client, running enhancement and extraction against your own Ollama instance. Nothing leaves the device with it selected.
+
+### Fixed
+
+- **The Ollama setting now decides where data goes.** Until this release the settings screen offered a backend choice and `get_analyzer` ignored it, always building the Claude client. Anyone who picked the local option still sent their state machine to Anthropic. The setting is read and honoured.
+- A model response with a closing brace before the opening one, for example `} see above {`, panicked instead of erroring. `find` and `rfind` can cross, and the resulting slice had a start greater than its end. The order is checked before slicing.
+
+### Changed
+
+- Ollama is the default backend for new installations, matching the rest of the portfolio. Stored settings are untouched.
+- The JSON-to-state-machine mapping moved from `claude.rs` into `ai/mod.rs`, where both backends share it. Duplicating roughly eighty lines into the new analyzer would have let the two providers interpret the same model output differently over time. `claude.rs` drops from 139 lines to 68 as a result.
+
+---
+
 ## [1.0.12] - 2026-07-31
 
 ### Fixed

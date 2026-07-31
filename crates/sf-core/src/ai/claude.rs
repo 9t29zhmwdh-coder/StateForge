@@ -1,12 +1,9 @@
-#![allow(unused_imports)]
 use async_trait::async_trait;
 use anyhow::{Result, anyhow};
 use reqwest::Client;
 use serde_json::Value;
-use crate::models::{StateMachine, State, Transition, StateKind, AnalysisSource, Language};
-use super::{AiAnalyzer, prompts};
-use chrono::Utc;
-use uuid::Uuid;
+use crate::models::StateMachine;
+use super::{AiAnalyzer, prompts, json_from_text, apply_enhancement, state_machine_from_json};
 
 const MODEL: &str = "claude-haiku-4-5-20251001";
 const API: &str = "https://api.anthropic.com";
@@ -40,11 +37,8 @@ impl ClaudeAnalyzer {
         Ok(resp.json().await?)
     }
 
-    fn extract_json(resp: &Value) -> Result<Value> {
-        let text = resp["content"][0]["text"].as_str().ok_or_else(|| anyhow!("No text"))?;
-        let start = text.find('{').ok_or_else(|| anyhow!("No JSON"))?;
-        let end = text.rfind('}').ok_or_else(|| anyhow!("No JSON end"))?;
-        Ok(serde_json::from_str(&text[start..=end])?)
+    fn text_of(resp: &Value) -> Result<&str> {
+        resp["content"][0]["text"].as_str().ok_or_else(|| anyhow!("No text in Claude response"))
     }
 }
 
@@ -53,79 +47,14 @@ impl AiAnalyzer for ClaudeAnalyzer {
     fn provider_name(&self) -> &str { "claude" }
 
     async fn enhance(&self, sm: &mut StateMachine) -> Result<()> {
-        let prompt = prompts::enhance_prompt(sm);
-        let resp = self.call(&prompt).await?;
-        let j = Self::extract_json(&resp)?;
-
-        sm.ai_summary = j["summary"].as_str().map(str::to_string);
-
-        // Apply state descriptions
-        if let Some(descs) = j["state_descriptions"].as_object() {
-            for state in &mut sm.states {
-                if let Some(desc) = descs.get(&state.name).and_then(|d| d.as_str()) {
-                    state.description = Some(desc.to_string());
-                }
-            }
-        }
-
-        // Mark error states
-        if let Some(error_paths) = j["error_paths"].as_array() {
-            for ep in error_paths {
-                if let Some(name) = ep.as_str() {
-                    if let Some(s) = sm.states.iter_mut().find(|s| s.name == name) {
-                        s.kind = StateKind::Error;
-                    }
-                }
-            }
-        }
-
+        let resp = self.call(&prompts::enhance_prompt(sm)).await?;
+        apply_enhancement(sm, &json_from_text(Self::text_of(&resp)?)?);
         Ok(())
     }
 
     async fn extract_from_description(&self, description: &str) -> Result<StateMachine> {
-        let prompt = prompts::extract_from_description_prompt(description);
-        let resp = self.call(&prompt).await?;
-        let j = Self::extract_json(&resp)?;
-
-        let name = j["name"].as_str().unwrap_or("DescriptionMachine");
-        let mut sm = StateMachine::new(name, AnalysisSource::Manual);
-
-        let mut state_id_map = std::collections::HashMap::new();
-
-        if let Some(states) = j["states"].as_array() {
-            for sv in states {
-                let sname = sv["name"].as_str().unwrap_or("Unknown");
-                let kind = match sv["kind"].as_str().unwrap_or("normal") {
-                    "initial" => StateKind::Initial,
-                    "final"   => StateKind::Final,
-                    "error"   => StateKind::Error,
-                    _         => crate::parser::helpers::state_kind_from_name(sname),
-                };
-                let mut s = State::new(sname, kind);
-                s.description = sv["description"].as_str().map(str::to_string);
-                state_id_map.insert(sname.to_string(), s.id.clone());
-                sm.add_state(s);
-            }
-        }
-
-        if let Some(transitions) = j["transitions"].as_array() {
-            for tv in transitions {
-                let from = tv["from"].as_str().unwrap_or("");
-                let to   = tv["to"].as_str().unwrap_or("");
-                let event = tv["event"].as_str().map(str::to_string);
-
-                if let (Some(from_id), Some(to_id)) = (state_id_map.get(from), state_id_map.get(to)) {
-                    let mut t = Transition::new(from_id, to_id, event);
-                    t.guard = tv["guard"].as_str().map(str::to_string);
-                    t.actions = tv["actions"].as_array()
-                        .map(|a| a.iter().filter_map(|v| v.as_str().map(str::to_string)).collect())
-                        .unwrap_or_default();
-                    sm.add_transition(t);
-                }
-            }
-        }
-
-        Ok(sm)
+        let resp = self.call(&prompts::extract_from_description_prompt(description)).await?;
+        Ok(state_machine_from_json(&json_from_text(Self::text_of(&resp)?)?))
     }
 
     async fn is_available(&self) -> bool {
