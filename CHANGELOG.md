@@ -6,6 +6,19 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), [Semantic Vers
 
 ---
 
+## [1.0.12] - 2026-07-31
+
+### Fixed
+
+- `SECURITY.md` claimed "no external network calls except localhost:11434 (Ollama)". The opposite is true: AI enhancement always goes to Anthropic, because `get_analyzer` builds the Claude client regardless of the backend setting and no local analyzer exists in the codebase. The README has said as much since the Ollama option was added; the security policy contradicted it. It now states where data actually goes, that the Ollama setting does not change that, and that nothing is sent without a stored key.
+- The supported-versions table still listed `0.1.x`, a line that no longer exists.
+
+### Added
+
+- `SECURITY.md` records GHSA-wrw7-89jp-8q8g against `glib` 0.18.5, which cannot be fixed from this repository because Tauri 2.11.5 pins `gtk ^0.18` and no patched 0.18.x exists.
+
+---
+
 ## [1.0.11] - 2026-07-31
 
 ### Changed
