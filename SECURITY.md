@@ -19,9 +19,9 @@ Response within 7 days.
 
 ## Security Design
 
-- **AI enhancement goes to Anthropic.** The settings screen offers an Ollama option, but it is not wired up: `get_analyzer` builds the Claude client regardless of the setting, and no local analyzer exists in the codebase yet. Selecting Ollama does not change where data goes. See the note in the README and [ROADMAP.md](ROADMAP.md)
-- When you run AI enhancement, the state machine you are enhancing, meaning its states, transitions and any source you pasted, is sent to `api.anthropic.com` using your own API key
-- Without a stored key, AI enhancement returns an error and sends nothing
+- **The AI backend setting decides what leaves the machine.** Ollama is the default and runs against your own instance, `localhost:11434` unless you change it, so nothing leaves the device. Selecting Claude sends the state machine you are enhancing, meaning its states, transitions and any source you pasted, to `api.anthropic.com` using your own API key
+- Selecting Claude without a stored key returns an error and sends nothing
+- Extraction, editing, rendering and export make no network calls under any setting
 - Everything else, meaning extraction, editing, rendering and export, runs locally and makes no network calls
 - No third-party analytics SDKs
 - All Tauri IPC commands explicitly allowlisted

@@ -55,7 +55,7 @@ StateForge's UI is available in English (default) and German; switch anytime wit
 | **AI Integration** | Claude (Anthropic API): enhance machines or create from natural language |
 | **Plugin System** | Extend with custom parsers via Rust trait |
 
-> **Note:** Settings includes an Ollama option and an "Auto AI Enhance" toggle, but neither is wired up yet; AI features currently always use Claude regardless of the backend setting, and enhancement is always manual (see [ROADMAP.md](ROADMAP.md)).
+> **Note:** The AI backend setting is honoured: pick Ollama and enhancement runs against your own instance, pick Claude and it uses the Anthropic API with your key. Ollama is the default. The "Auto AI Enhance" toggle is still not wired up; enhancement is always manual (see [ROADMAP.md](ROADMAP.md)).
 
 ---
 

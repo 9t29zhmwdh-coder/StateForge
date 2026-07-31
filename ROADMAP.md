@@ -16,9 +16,6 @@
 
 ## v0.2.0, Edit & Annotate
 
-- Wire up the Ollama option in Settings to an actual `OllamaAnalyzer`; the
-  UI already lets you pick "ollama" and set a host/model, but the backend's
-  `get_analyzer()` always returns `ClaudeAnalyzer` regardless of the setting
 - Wire up the "Auto AI Enhance" toggle in Settings; `auto_ai_enhance` is
   stored in `AppSettings` but never read anywhere, so toggling it has no effect
 - In-canvas FSM editing (add/remove states and transitions via GUI)

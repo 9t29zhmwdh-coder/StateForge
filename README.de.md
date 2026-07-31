@@ -56,7 +56,7 @@ Die Oberfläche von StateForge ist auf Englisch (Standard) und Deutsch verfügba
 | **KI-Integration** | Claude (Anthropic API): Maschinen anreichern oder aus Beschreibung erstellen |
 | **Plugin-System** | Erweiterbar mit eigenen Parsern via Rust-Trait |
 
-> **Hinweis:** In den Einstellungen gibt es eine Ollama-Option und einen "Auto-KI-Anreicherung"-Schalter, aber keins von beidem ist angebunden; KI-Funktionen nutzen aktuell unabhängig von der Backend-Einstellung immer Claude, und die Anreicherung erfolgt immer manuell (siehe [ROADMAP.md](ROADMAP.md)).
+> **Hinweis:** Die Backend-Einstellung greift: mit Ollama läuft die Anreicherung gegen deine eigene Instanz, mit Claude über die Anthropic-API mit deinem Schlüssel. Ollama ist die Voreinstellung. Der Schalter "Auto-KI-Anreicherung" ist weiterhin nicht angebunden, die Anreicherung erfolgt immer manuell (siehe [ROADMAP.md](ROADMAP.md)).
 
 ---
 
