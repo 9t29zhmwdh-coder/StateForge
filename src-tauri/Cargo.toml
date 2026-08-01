@@ -28,7 +28,7 @@ tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 # es faellt auf einen Speicher im Prozessspeicher zurueck, den ein zweiter
 # Prozess nicht sieht. Zugangsdaten waren damit nach jedem Neustart weg,
 # ohne dass ein Fehler gemeldet wurde.
-keyring    = { version = "3", features = ["apple-native", "windows-native", "async-secret-service", "crypto-openssl", "tokio"] }
+keyring    = { version = "3", features = ["apple-native", "windows-native", "async-secret-service", "crypto-rust", "tokio"] }
 dirs       = "6"
 sqlx       = { workspace = true }
 chrono     = { workspace = true }

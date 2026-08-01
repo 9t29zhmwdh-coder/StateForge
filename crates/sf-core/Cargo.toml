@@ -20,7 +20,7 @@ sqlx         = { workspace = true }
 # es faellt auf einen Speicher im Prozessspeicher zurueck, den ein zweiter
 # Prozess nicht sieht. Zugangsdaten waren damit nach jedem Neustart weg,
 # ohne dass ein Fehler gemeldet wurde.
-keyring      = { version = "3", features = ["apple-native", "windows-native", "async-secret-service", "crypto-openssl", "tokio"] }
+keyring      = { version = "3", features = ["apple-native", "windows-native", "async-secret-service", "crypto-rust", "tokio"] }
 async-trait  = "0.1"
 dirs         = "6"
 
