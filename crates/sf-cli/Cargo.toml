@@ -11,7 +11,6 @@ path = "src/main.rs"
 sf-core   = { path = "../sf-core" }
 tokio     = { workspace = true }
 anyhow    = { workspace = true }
-tracing   = { workspace = true }
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 clap      = { version = "4", features = ["derive"] }
 serde_json = { workspace = true }
