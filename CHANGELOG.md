@@ -6,6 +6,14 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), [Semantic Vers
 
 ---
 
+## [1.1.2] - 2026-08-01
+
+### Removed
+
+- five declared dependencies that no code references: petgraph, tracing, dashmap, glob, indexmap. They were compiled on every build, shipped their own transitive tree, counted toward the supply-chain surface, and produced Dependabot pull requests proposing upgrades to code nobody calls. Verified by removing them and running `cargo check`, `cargo clippy` with `-D warnings` and the full test suite, all clean.
+
+---
+
 ## [1.1.1] - 2026-08-01
 
 ### Changed
