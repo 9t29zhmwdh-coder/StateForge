@@ -20,4 +20,4 @@ serde_json = { workspace = true }
 # Prozess nicht sieht. Zugangsdaten waren damit nach jedem Neustart weg,
 # ohne dass ein Fehler gemeldet wurde.
 keyring   = { version = "3", features = ["apple-native", "windows-native", "async-secret-service", "crypto-openssl", "tokio"] }
-dirs      = "5"
+dirs      = "6"
