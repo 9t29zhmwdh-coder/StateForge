@@ -8,9 +8,13 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), [Semantic Vers
 
 ## [1.1.2] - 2026-08-01
 
+### Changed
+
+- Dependency updates merged since 1.1.1, carried by this version rather than one release each: `thiserror` 1.0.69 to 2.0.19 and `dirs` 5.0.1 to 6.0.0. The `dirs` bump was checked rather than assumed, because `data_local_dir()` decides where the database lives: both versions were built and their paths compared, and the source diff between `dirs-sys` 0.4.1 and 0.5.0 is a single Windows FFI line, `HANDLE::default()` replaced by `null_mut()`. No path logic changed on any platform.
+
 ### Removed
 
-- five declared dependencies that no code references: petgraph, tracing, dashmap, glob, indexmap. They were compiled on every build, shipped their own transitive tree, counted toward the supply-chain surface, and produced Dependabot pull requests proposing upgrades to code nobody calls. Verified by removing them and running `cargo check`, `cargo clippy` with `-D warnings` and the full test suite, all clean.
+- Five declared dependencies that no code references: petgraph, tracing, dashmap, glob, indexmap. They were compiled on every build, shipped their own transitive tree, counted toward the supply-chain surface, and produced Dependabot pull requests proposing upgrades to code nobody calls. Verified by removing them and running `cargo check`, `cargo clippy` with `-D warnings` and the full test suite, all clean.
 
 ---
 
