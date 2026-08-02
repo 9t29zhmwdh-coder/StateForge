@@ -6,6 +6,15 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), [Semantic Vers
 
 ---
 
+## [1.1.3] - 2026-08-01
+
+### Changed
+
+- `reqwest` 0.12.28 to 0.13.4. This replaces the TLS stack rather than merely raising a number: `native-tls` and OpenSSL leave, `rustls-platform-verifier` and `aws-lc-rs` arrive. Certificate verification matters here, because the AI enhancement talks to `https://api.anthropic.com`, so the handshake was tested against that host under both versions before merging. Both reach it and return `401 Unauthorized` without a key, which is the proof that the handshake and the certificate check completed.
+- OpenSSL does not leave this tree entirely. It still arrives through `keyring` 3 and `secret-service`, and only in the Linux build. `reqwest` cannot remove that one.
+
+---
+
 ## [1.1.2] - 2026-08-01
 
 ### Changed
