@@ -6,6 +6,14 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), [Semantic Vers
 
 ---
 
+## [1.1.5] - 2026-08-02
+
+### Changed
+
+- `sqlx` 0.8.6 to 0.9.0, merged since 1.1.4 and carried by this version. Unlike LogLens, this project compiled against 0.9 without changes: the new version rejects SQL that is not a `&'static str`, and every statement here already is one. That refusal is what exposed an injection in LogLens; here it confirmed there was nothing to expose.
+
+---
+
 ## [1.1.4] - 2026-08-02
 
 ### Security
