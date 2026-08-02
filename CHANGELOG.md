@@ -6,6 +6,15 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), [Semantic Vers
 
 ---
 
+## [1.1.4] - 2026-08-02
+
+### Security
+
+- `keyring` switches from `crypto-openssl` to `crypto-rust`, which removes OpenSSL from the Linux build. The Secret Service protocol encrypts the session between the application and the keyring daemon, and until now that encryption came from the OpenSSL C library, pulled in through `keyring` and `secret-service`. `crypto-rust` implements the same algorithms the specification prescribes, AES-CBC with SHA-2 and HKDF, using the RustCrypto crates instead. The wire format is defined by the specification, so an existing keyring stays readable.
+- What this buys: OpenSSL leaves the dependency tree entirely, `cargo tree -i openssl --target x86_64-unknown-linux-gnu` no longer finds a package. With it goes a C library with a long CVE history and the requirement to have its development headers present when building for Linux. macOS and Windows are unaffected either way, since both use their native keychain and never compiled this path.
+
+---
+
 ## [1.1.3] - 2026-08-01
 
 ### Changed
