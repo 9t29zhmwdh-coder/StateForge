@@ -30,7 +30,7 @@ export function AnalysisView() {
 
   if (!active) {
     return (
-      <div className="flex items-center justify-center h-full text-[#8b949e]">
+      <div className="flex items-center justify-center h-full text-sf-muted">
         {t('analysis.noMachineSelected')}
       </div>
     )
@@ -54,15 +54,15 @@ export function AnalysisView() {
 
       {/* States list */}
       <section className="mb-6">
-        <h3 className="text-sm font-semibold text-[#8b949e] uppercase tracking-wider mb-3">{t('analysis.states')}</h3>
+        <h3 className="text-sm font-semibold text-sf-muted uppercase tracking-wider mb-3">{t('analysis.states')}</h3>
         <div className="space-y-1">
           {active.states.map(s => (
-            <div key={s.id} className="flex items-center gap-3 px-3 py-2 bg-[#161b22] rounded-md border border-[#30363d]">
-              <span className={`w-2 h-2 rounded-full flex-shrink-0 ${kindColor(s.kind)}`} />
+            <div key={s.id} className="flex items-center gap-3 px-3 py-2 bg-sf-surface rounded-md border border-sf-border">
+              <span className={`w-2 h-2 rounded-full shrink-0 ${kindColor(s.kind)}`} />
               <span className="text-sm font-mono text-[#e6edf3]">{s.name}</span>
-              <span className="text-xs text-[#8b949e] capitalize ml-auto">{s.kind}</span>
+              <span className="text-xs text-sf-muted capitalize ml-auto">{s.kind}</span>
               {s.description && (
-                <span className="text-xs text-[#8b949e] italic truncate max-w-[200px]">{s.description}</span>
+                <span className="text-xs text-sf-muted italic truncate max-w-[200px]">{s.description}</span>
               )}
             </div>
           ))}
@@ -71,12 +71,12 @@ export function AnalysisView() {
 
       {/* Transitions list */}
       <section className="mb-6">
-        <h3 className="text-sm font-semibold text-[#8b949e] uppercase tracking-wider mb-3">{t('analysis.transitions')}</h3>
+        <h3 className="text-sm font-semibold text-sf-muted uppercase tracking-wider mb-3">{t('analysis.transitions')}</h3>
         <div className="space-y-1">
           {active.transitions.map(tr => (
-            <div key={tr.id} className="flex items-center gap-2 px-3 py-2 bg-[#161b22] rounded-md border border-[#30363d] text-sm font-mono">
-              <span className="text-[#8b949e]">{tr.from_state}</span>
-              <span className="text-[#30363d]">→</span>
+            <div key={tr.id} className="flex items-center gap-2 px-3 py-2 bg-sf-surface rounded-md border border-sf-border text-sm font-mono">
+              <span className="text-sf-muted">{tr.from_state}</span>
+              <span className="text-sf-border">→</span>
               <span className="text-[#e6edf3]">{tr.to_state}</span>
               {tr.event && <span className="ml-auto text-xs text-[#58a6ff]">[{tr.event}]</span>}
               {tr.guard && <span className="text-xs text-[#d29922]">{'{'}guard{'}'}</span>}
@@ -97,8 +97,8 @@ export function AnalysisView() {
 
       {/* AI Summary */}
       {active.ai_summary && (
-        <section className="mb-6 p-4 bg-[#161b22] border border-[#30363d] rounded-md">
-          <div className="text-xs font-semibold text-[#8b949e] uppercase tracking-wider mb-2">{t('analysis.aiSummary')}</div>
+        <section className="mb-6 p-4 bg-sf-surface border border-sf-border rounded-md">
+          <div className="text-xs font-semibold text-sf-muted uppercase tracking-wider mb-2">{t('analysis.aiSummary')}</div>
           <p className="text-sm text-[#e6edf3]">{active.ai_summary}</p>
         </section>
       )}
@@ -118,8 +118,8 @@ export function AnalysisView() {
 
 function Stat({ label, value, color = 'text-[#e6edf3]' }: { label: string; value: string | number; color?: string }) {
   return (
-    <div className="bg-[#161b22] border border-[#30363d] rounded-md px-4 py-3">
-      <div className="text-xs text-[#8b949e] mb-1">{label}</div>
+    <div className="bg-sf-surface border border-sf-border rounded-md px-4 py-3">
+      <div className="text-xs text-sf-muted mb-1">{label}</div>
       <div className={`text-xl font-bold ${color}`}>{value}</div>
     </div>
   )
@@ -130,5 +130,5 @@ function kindColor(kind: string) {
   if (kind === 'final')    return 'bg-[#58a6ff]'
   if (kind === 'error')    return 'bg-[#f85149]'
   if (kind === 'parallel') return 'bg-[#d2a8ff]'
-  return 'bg-[#8b949e]'
+  return 'bg-sf-muted'
 }

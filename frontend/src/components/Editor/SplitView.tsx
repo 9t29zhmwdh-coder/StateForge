@@ -41,9 +41,9 @@ export function SplitView() {
   return (
     <div className="flex h-full">
       {/* Left: Code Input */}
-      <div className="w-[420px] flex-shrink-0 border-r border-[#30363d] flex flex-col">
-        <div className="px-4 py-2 border-b border-[#30363d] flex items-center justify-between">
-          <span className="text-xs font-semibold text-[#8b949e] uppercase tracking-wider">{t('split.input')}</span>
+      <div className="w-[420px] shrink-0 border-r border-sf-border flex flex-col">
+        <div className="px-4 py-2 border-b border-sf-border flex items-center justify-between">
+          <span className="text-xs font-semibold text-sf-muted uppercase tracking-wider">{t('split.input')}</span>
           {active && (
             <span className="text-xs text-[#58a6ff] truncate max-w-[180px]">{active.name}</span>
           )}
@@ -55,8 +55,8 @@ export function SplitView() {
 
       {/* Right: Diagram */}
       <div className="flex-1 flex flex-col">
-        <div className="px-4 py-2 border-b border-[#30363d] flex items-center gap-3">
-          <span className="text-xs font-semibold text-[#8b949e] uppercase tracking-wider">{t('split.diagram')}</span>
+        <div className="px-4 py-2 border-b border-sf-border flex items-center gap-3">
+          <span className="text-xs font-semibold text-sf-muted uppercase tracking-wider">{t('split.diagram')}</span>
           <div className="flex gap-1">
             {(['flow', 'mermaid', 'svg'] as const).map(f => (
               <button
@@ -65,7 +65,7 @@ export function SplitView() {
                 className={`px-2.5 py-0.5 text-xs rounded transition-colors ${
                   fmt === f
                     ? 'bg-[#1f6feb] text-white'
-                    : 'text-[#8b949e] hover:text-[#e6edf3] hover:bg-[#21262d]'
+                    : 'text-sf-muted hover:text-[#e6edf3] hover:bg-[#21262d]'
                 }`}
               >
                 {f === 'flow' ? t('split.interactive') : f.toUpperCase()}
@@ -81,7 +81,7 @@ export function SplitView() {
                 a.download = `${active.name}.${fmt === 'mermaid' ? 'mmd' : 'svg'}`
                 a.click()
               }}
-              className="ml-auto text-xs text-[#8b949e] hover:text-[#e6edf3] px-2 py-0.5 hover:bg-[#21262d] rounded"
+              className="ml-auto text-xs text-sf-muted hover:text-[#e6edf3] px-2 py-0.5 hover:bg-[#21262d] rounded-sm"
             >
               {t('split.export')}
             </button>
@@ -104,7 +104,7 @@ export function SplitView() {
               {diagram ? (
                 <div dangerouslySetInnerHTML={{ __html: diagram }} className="[&>svg]:max-w-full" />
               ) : (
-                <div className="flex items-center justify-center h-full text-[#8b949e] text-sm">
+                <div className="flex items-center justify-center h-full text-sf-muted text-sm">
                   {t('split.noMachineLoaded')}
                 </div>
               )}

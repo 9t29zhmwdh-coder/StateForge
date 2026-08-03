@@ -6,6 +6,16 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), [Semantic Vers
 
 ---
 
+## [1.2.0] - 2026-08-03
+
+### Changed
+
+- Tailwind CSS 3 to 4. `tailwind.config.ts` is gone; the six `sf` colours and the mono stack are theme variables in the stylesheet now, and PostCSS uses `@tailwindcss/postcss`.
+- Three utility renames went through seven components. `rounded` became `rounded-sm` because version 4 shifted the radius scale by one step and the old name now means half as much, `outline-none` became `outline-hidden`, and `flex-shrink-0` became `shrink-0`.
+- autoprefixer is no longer a dependency. Version 4 handles prefixing itself, and the generated stylesheet comes out as the same file with and without it, down to the content hash.
+
+---
+
 ## [1.1.6] - 2026-08-02
 
 ### Changed
