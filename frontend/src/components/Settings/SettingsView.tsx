@@ -53,7 +53,7 @@ export function SettingsView() {
             <button
               key={b}
               onClick={() => set('ai_backend', b)}
-              className={`px-4 py-1.5 text-sm rounded capitalize transition-colors ${
+              className={`px-4 py-1.5 text-sm rounded-sm capitalize transition-colors ${
                 draft.ai_backend === b
                   ? 'bg-[#1f6feb] text-white'
                   : 'bg-sf-surface text-sf-muted hover:text-[#e6edf3]'
@@ -105,7 +105,7 @@ export function SettingsView() {
             <button
               key={f}
               onClick={() => set('default_diagram_format', f)}
-              className={`px-3 py-1 text-sm rounded capitalize transition-colors ${
+              className={`px-3 py-1 text-sm rounded-sm capitalize transition-colors ${
                 draft.default_diagram_format === f
                   ? 'bg-[#1f6feb] text-white'
                   : 'bg-sf-surface text-sf-muted hover:text-[#e6edf3]'

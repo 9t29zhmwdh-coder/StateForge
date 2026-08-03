@@ -100,7 +100,7 @@ export function CodePanel({ onParsed }: Props) {
                 <button
                   key={l}
                   onClick={() => setLang(l)}
-                  className={`px-2 py-0.5 text-xs rounded capitalize transition-colors ${
+                  className={`px-2 py-0.5 text-xs rounded-sm capitalize transition-colors ${
                     lang === l
                       ? 'bg-[#1f6feb] text-white'
                       : 'text-sf-muted hover:text-[#e6edf3] hover:bg-[#21262d]'

@@ -62,7 +62,7 @@ export function SplitView() {
               <button
                 key={f}
                 onClick={() => setFmt(f)}
-                className={`px-2.5 py-0.5 text-xs rounded transition-colors ${
+                className={`px-2.5 py-0.5 text-xs rounded-sm transition-colors ${
                   fmt === f
                     ? 'bg-[#1f6feb] text-white'
                     : 'text-sf-muted hover:text-[#e6edf3] hover:bg-[#21262d]'

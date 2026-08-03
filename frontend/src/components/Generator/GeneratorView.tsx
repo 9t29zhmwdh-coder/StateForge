@@ -73,7 +73,7 @@ export function GeneratorView() {
               key={target_.id}
               onClick={() => setTarget(target_.id)}
               title={target_.desc}
-              className={`px-3 py-1 text-xs rounded transition-colors ${
+              className={`px-3 py-1 text-xs rounded-sm transition-colors ${
                 target === target_.id
                   ? 'bg-[#1f6feb] text-white'
                   : 'text-sf-muted hover:text-[#e6edf3] bg-sf-surface hover:bg-[#21262d]'
