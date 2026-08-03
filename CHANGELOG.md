@@ -6,6 +6,23 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), [Semantic Vers
 
 ---
 
+## [1.3.0] - 2026-08-04
+
+### Changed
+
+- `zustand` 4 to 5. All three stores already import the named `create`, which is the form version 5 expects.
+- `github/codeql-action` 4.37.3 to 4.37.4 and `actions/attest` 4.2.0 to 4.2.1, merged separately and carried by this version.
+
+### Fixed
+
+- Five occurrences of `rounded` that the Tailwind 4 upgrade tool had left behind, all inside template literals spanning several lines. In version 4 that name means exactly what `rounded-sm` means, so nothing changes visually, but the codebase carried two spellings for one value.
+
+### Removed
+
+- `date-fns`. Dependabot proposed a 3 to 4 bump; the package is declared in `package.json` and imported in no source file.
+
+---
+
 ## [1.2.1] - 2026-08-03
 
 ### Fixed
