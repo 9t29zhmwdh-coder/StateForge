@@ -56,7 +56,7 @@ export function GeneratorView() {
 
   if (!active) {
     return (
-      <div className="flex items-center justify-center h-full text-[#8b949e]">
+      <div className="flex items-center justify-center h-full text-sf-muted">
         {t('generator.noMachineSelected')}
       </div>
     )
@@ -65,8 +65,8 @@ export function GeneratorView() {
   return (
     <div className="flex flex-col h-full">
       {/* Target selector */}
-      <div className="flex items-center gap-4 px-6 py-3 border-b border-[#30363d]">
-        <span className="text-xs text-[#8b949e] uppercase tracking-wider">{t('generator.targetLanguage')}</span>
+      <div className="flex items-center gap-4 px-6 py-3 border-b border-sf-border">
+        <span className="text-xs text-sf-muted uppercase tracking-wider">{t('generator.targetLanguage')}</span>
         <div className="flex gap-2">
           {TARGETS.map(target_ => (
             <button
@@ -76,7 +76,7 @@ export function GeneratorView() {
               className={`px-3 py-1 text-xs rounded transition-colors ${
                 target === target_.id
                   ? 'bg-[#1f6feb] text-white'
-                  : 'text-[#8b949e] hover:text-[#e6edf3] bg-[#161b22] hover:bg-[#21262d]'
+                  : 'text-sf-muted hover:text-[#e6edf3] bg-sf-surface hover:bg-[#21262d]'
               }`}
             >
               {target_.label}
@@ -86,13 +86,13 @@ export function GeneratorView() {
         <div className="ml-auto flex gap-2">
           <button
             onClick={handleCopy}
-            className="px-3 py-1 text-xs text-[#8b949e] hover:text-[#e6edf3] bg-[#161b22] hover:bg-[#21262d] rounded transition-colors"
+            className="px-3 py-1 text-xs text-sf-muted hover:text-[#e6edf3] bg-sf-surface hover:bg-[#21262d] rounded-sm transition-colors"
           >
             {copied ? t('generator.copied') : t('generator.copy')}
           </button>
           <button
             onClick={handleDownload}
-            className="px-3 py-1 text-xs text-[#8b949e] hover:text-[#e6edf3] bg-[#161b22] hover:bg-[#21262d] rounded transition-colors"
+            className="px-3 py-1 text-xs text-sf-muted hover:text-[#e6edf3] bg-sf-surface hover:bg-[#21262d] rounded-sm transition-colors"
           >
             {t('generator.download')}
           </button>
@@ -102,7 +102,7 @@ export function GeneratorView() {
       {/* Code output */}
       <div className="flex-1 overflow-auto">
         {loading ? (
-          <div className="flex items-center justify-center h-full text-[#8b949e] text-sm">{t('generator.generating')}</div>
+          <div className="flex items-center justify-center h-full text-sf-muted text-sm">{t('generator.generating')}</div>
         ) : (
           <pre className="p-6 text-sm font-mono text-[#e6edf3] whitespace-pre-wrap leading-relaxed">
             {code || t('generator.generatingComment')}

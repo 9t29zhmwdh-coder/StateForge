@@ -41,22 +41,22 @@ export default function App() {
   ]
 
   return (
-    <div className="flex h-screen bg-[#0d1117] text-[#e6edf3] overflow-hidden">
+    <div className="flex h-screen bg-sf-bg text-[#e6edf3] overflow-hidden">
       {/* Sidebar */}
-      <aside className="w-52 flex-shrink-0 border-r border-[#30363d] flex flex-col">
-        <div className="px-3 py-4 border-b border-[#30363d]">
+      <aside className="w-52 shrink-0 border-r border-sf-border flex flex-col">
+        <div className="px-3 py-4 border-b border-sf-border">
           <div className="text-sm font-bold text-[#58a6ff] tracking-widest uppercase">StateForge</div>
-          <div className="text-xs text-[#8b949e] mt-0.5">{t('nav.tagline')}</div>
+          <div className="text-xs text-sf-muted mt-0.5">{t('nav.tagline')}</div>
         </div>
 
         {/* Machine list */}
         <div className="flex-1 overflow-y-auto py-2">
-          <div className="px-3 py-1 text-xs text-[#8b949e] uppercase tracking-wider">{t('nav.machines')}</div>
+          <div className="px-3 py-1 text-xs text-sf-muted uppercase tracking-wider">{t('nav.machines')}</div>
           {machines.map(m => (
             <button
               key={m.id}
               onClick={() => setActive(m)}
-              className={`w-full text-left px-3 py-1.5 text-sm truncate hover:bg-[#161b22] transition-colors ${
+              className={`w-full text-left px-3 py-1.5 text-sm truncate hover:bg-sf-surface transition-colors ${
                 active?.id === m.id ? 'bg-[#1c2128] text-[#58a6ff] border-l-2 border-[#58a6ff]' : 'text-[#c9d1d9]'
               }`}
             >
@@ -65,14 +65,14 @@ export default function App() {
           ))}
           <button
             onClick={handleNewMachine}
-            className="w-full text-left px-3 py-1.5 text-sm text-[#8b949e] hover:text-[#58a6ff] hover:bg-[#161b22] transition-colors"
+            className="w-full text-left px-3 py-1.5 text-sm text-sf-muted hover:text-[#58a6ff] hover:bg-sf-surface transition-colors"
           >
             {t('nav.newMachine')}
           </button>
         </div>
 
         {/* Nav tabs */}
-        <nav className="border-t border-[#30363d] py-2">
+        <nav className="border-t border-sf-border py-2">
           {tabs.map(tabItem => (
             <button
               key={tabItem.id}
@@ -80,7 +80,7 @@ export default function App() {
               className={`w-full text-left px-3 py-1.5 text-sm transition-colors ${
                 tab === tabItem.id
                   ? 'bg-[#1c2128] text-[#58a6ff]'
-                  : 'text-[#8b949e] hover:text-[#e6edf3] hover:bg-[#161b22]'
+                  : 'text-sf-muted hover:text-[#e6edf3] hover:bg-sf-surface'
               }`}
             >
               {tabItem.label}
@@ -91,7 +91,7 @@ export default function App() {
         {/* Language toggle */}
         <button
           onClick={toggle}
-          className="border-t border-[#30363d] px-3 py-2 text-xs text-[#8b949e] hover:text-[#58a6ff] hover:bg-[#161b22] transition-colors text-left"
+          className="border-t border-sf-border px-3 py-2 text-xs text-sf-muted hover:text-[#58a6ff] hover:bg-sf-surface transition-colors text-left"
         >
           {lang === 'en' ? 'DE' : 'EN'}
         </button>

@@ -99,7 +99,7 @@ export function DiagramEditor() {
 
   if (!active) {
     return (
-      <div className="flex-1 flex items-center justify-center text-[#8b949e]">
+      <div className="flex-1 flex items-center justify-center text-sf-muted">
         {t('diagram.noMachineSelected')}
       </div>
     )
@@ -129,7 +129,7 @@ export function DiagramEditor() {
           </div>
         </Panel>
         <Panel position="top-left">
-          <div className="text-sm font-semibold text-[#e6edf3] bg-[#161b22] border border-[#30363d] px-3 py-1.5 rounded-md">
+          <div className="text-sm font-semibold text-[#e6edf3] bg-sf-surface border border-sf-border px-3 py-1.5 rounded-md">
             {active.name}
           </div>
         </Panel>

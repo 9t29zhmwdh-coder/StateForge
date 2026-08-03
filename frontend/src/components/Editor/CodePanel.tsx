@@ -56,9 +56,9 @@ export function CodePanel({ onParsed }: Props) {
   }
 
   return (
-    <div className="flex flex-col h-full bg-[#0d1117]">
+    <div className="flex flex-col h-full bg-sf-bg">
       {/* Mode tabs */}
-      <div className="flex border-b border-[#30363d]">
+      <div className="flex border-b border-sf-border">
         {(['code', 'log', 'ai'] as const).map(m => (
           <button
             key={m}
@@ -66,7 +66,7 @@ export function CodePanel({ onParsed }: Props) {
             className={`px-4 py-2 text-xs font-medium capitalize transition-colors border-b-2 ${
               mode === m
                 ? 'border-[#58a6ff] text-[#58a6ff]'
-                : 'border-transparent text-[#8b949e] hover:text-[#e6edf3]'
+                : 'border-transparent text-sf-muted hover:text-[#e6edf3]'
             }`}
           >
             {m === 'code' ? t('codePanel.code') : m === 'log' ? t('codePanel.log') : t('codePanel.ai')}
@@ -80,7 +80,7 @@ export function CodePanel({ onParsed }: Props) {
             value={aiDesc}
             onChange={e => setAiDesc(e.target.value)}
             placeholder={t('codePanel.aiPlaceholder')}
-            className="flex-1 bg-[#161b22] border border-[#30363d] rounded-md p-3 text-sm text-[#e6edf3] font-mono resize-none focus:outline-none focus:border-[#58a6ff] placeholder-[#484f58]"
+            className="flex-1 bg-sf-surface border border-sf-border rounded-md p-3 text-sm text-[#e6edf3] font-mono resize-none focus:outline-hidden focus:border-[#58a6ff] placeholder-[#484f58]"
           />
           {error && <div className="text-xs text-[#f85149] px-1">{error}</div>}
           <button
@@ -94,8 +94,8 @@ export function CodePanel({ onParsed }: Props) {
       ) : (
         <div className="flex flex-col h-full">
           {mode === 'code' && (
-            <div className="flex items-center gap-2 px-4 py-2 border-b border-[#30363d]">
-              <span className="text-xs text-[#8b949e]">{t('codePanel.language')}</span>
+            <div className="flex items-center gap-2 px-4 py-2 border-b border-sf-border">
+              <span className="text-xs text-sf-muted">{t('codePanel.language')}</span>
               {LANGUAGES.map(l => (
                 <button
                   key={l}
@@ -103,7 +103,7 @@ export function CodePanel({ onParsed }: Props) {
                   className={`px-2 py-0.5 text-xs rounded capitalize transition-colors ${
                     lang === l
                       ? 'bg-[#1f6feb] text-white'
-                      : 'text-[#8b949e] hover:text-[#e6edf3] hover:bg-[#21262d]'
+                      : 'text-sf-muted hover:text-[#e6edf3] hover:bg-[#21262d]'
                   }`}
                 >
                   {l}
@@ -115,11 +115,11 @@ export function CodePanel({ onParsed }: Props) {
             value={code}
             onChange={e => { setCode(e.target.value); detectLang(e.target.value) }}
             placeholder={mode === 'log' ? t('codePanel.logPlaceholder') : `${lang}${t('codePanel.codePlaceholderSuffix')}`}
-            className="flex-1 bg-[#0d1117] border-0 p-4 text-sm text-[#e6edf3] font-mono resize-none focus:outline-none placeholder-[#484f58]"
+            className="flex-1 bg-sf-bg border-0 p-4 text-sm text-[#e6edf3] font-mono resize-none focus:outline-hidden placeholder-[#484f58]"
             spellCheck={false}
           />
           {error && <div className="text-xs text-[#f85149] px-4 pb-2">{error}</div>}
-          <div className="p-3 border-t border-[#30363d]">
+          <div className="p-3 border-t border-sf-border">
             <button
               onClick={handleParse}
               disabled={loading || !code.trim()}

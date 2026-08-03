@@ -56,7 +56,7 @@ export function SettingsView() {
               className={`px-4 py-1.5 text-sm rounded capitalize transition-colors ${
                 draft.ai_backend === b
                   ? 'bg-[#1f6feb] text-white'
-                  : 'bg-[#161b22] text-[#8b949e] hover:text-[#e6edf3]'
+                  : 'bg-sf-surface text-sf-muted hover:text-[#e6edf3]'
               }`}
             >
               {b}
@@ -73,7 +73,7 @@ export function SettingsView() {
                 value={apiKey}
                 onChange={e => setApiKey(e.target.value)}
                 placeholder={hasKey ? t('settings.setPlaceholder') : 'sk-ant-...'}
-                className="flex-1 bg-[#161b22] border border-[#30363d] rounded-md px-3 py-1.5 text-sm text-[#e6edf3] focus:outline-none focus:border-[#58a6ff] placeholder-[#484f58]"
+                className="flex-1 bg-sf-surface border border-sf-border rounded-md px-3 py-1.5 text-sm text-[#e6edf3] focus:outline-hidden focus:border-[#58a6ff] placeholder-[#484f58]"
               />
               <button
                 onClick={handleSaveKey}
@@ -83,7 +83,7 @@ export function SettingsView() {
                 {keySaved ? t('settings.saved') : t('settings.save')}
               </button>
             </div>
-            <p className="text-xs text-[#8b949e] mt-1">{t('settings.keychainNote')}</p>
+            <p className="text-xs text-sf-muted mt-1">{t('settings.keychainNote')}</p>
           </>
         )}
 
@@ -108,7 +108,7 @@ export function SettingsView() {
               className={`px-3 py-1 text-sm rounded capitalize transition-colors ${
                 draft.default_diagram_format === f
                   ? 'bg-[#1f6feb] text-white'
-                  : 'bg-[#161b22] text-[#8b949e] hover:text-[#e6edf3]'
+                  : 'bg-sf-surface text-sf-muted hover:text-[#e6edf3]'
               }`}
             >
               {f}
@@ -121,14 +121,14 @@ export function SettingsView() {
           <button
             onClick={() => set('auto_ai_enhance', !draft.auto_ai_enhance)}
             className={`w-10 h-5 rounded-full transition-colors relative ${
-              draft.auto_ai_enhance ? 'bg-[#238636]' : 'bg-[#30363d]'
+              draft.auto_ai_enhance ? 'bg-[#238636]' : 'bg-sf-border'
             }`}
           >
             <span className={`absolute top-0.5 w-4 h-4 bg-white rounded-full transition-transform ${
               draft.auto_ai_enhance ? 'left-5' : 'left-0.5'
             }`} />
           </button>
-          <span className="text-sm text-[#8b949e]">
+          <span className="text-sm text-sf-muted">
             {draft.auto_ai_enhance ? t('settings.active') : t('settings.inactive')}
           </span>
         </div>
@@ -148,15 +148,15 @@ export function SettingsView() {
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="mb-6 bg-[#161b22] border border-[#30363d] rounded-lg p-4">
-      <h3 className="text-xs font-semibold text-[#8b949e] uppercase tracking-wider mb-4">{title}</h3>
+    <div className="mb-6 bg-sf-surface border border-sf-border rounded-lg p-4">
+      <h3 className="text-xs font-semibold text-sf-muted uppercase tracking-wider mb-4">{title}</h3>
       {children}
     </div>
   )
 }
 
 function Label({ children }: { children: React.ReactNode }) {
-  return <div className="text-xs text-[#8b949e] mb-1.5">{children}</div>
+  return <div className="text-xs text-sf-muted mb-1.5">{children}</div>
 }
 
 function Input({ value, onChange, placeholder }: { value: string; onChange: (v: string) => void; placeholder?: string }) {
@@ -165,7 +165,7 @@ function Input({ value, onChange, placeholder }: { value: string; onChange: (v: 
       value={value}
       onChange={e => onChange(e.target.value)}
       placeholder={placeholder}
-      className="w-full bg-[#0d1117] border border-[#30363d] rounded-md px-3 py-1.5 text-sm text-[#e6edf3] font-mono focus:outline-none focus:border-[#58a6ff] mb-3 placeholder-[#484f58]"
+      className="w-full bg-sf-bg border border-sf-border rounded-md px-3 py-1.5 text-sm text-[#e6edf3] font-mono focus:outline-hidden focus:border-[#58a6ff] mb-3 placeholder-[#484f58]"
     />
   )
 }
