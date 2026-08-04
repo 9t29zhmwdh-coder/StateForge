@@ -6,6 +6,14 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), [Semantic Vers
 
 ---
 
+## [1.3.1] - 2026-08-04
+
+### Changed
+
+- TypeScript 5.9.3 to 7. No source change was needed. The production build runs `tsc` ahead of vite, so the typecheck has to pass for anything to be produced at all, and the generated files come out with the same content hashes as before.
+
+---
+
 ## [1.3.0] - 2026-08-04
 
 ### Changed
