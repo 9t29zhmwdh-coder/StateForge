@@ -16,6 +16,10 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), [Semantic Vers
 
   Found while fixing the same defect in LogLens. A sweep across the other Tauri projects found it here and in LifeSort; ClarityDesk, BugRadar, DeviceHealth, LifePlanner, MailLoom and CleanFlow are unaffected.
 
+### Security
+
+- `h2` 0.4.15 to 0.4.19, closing RUSTSEC-2026-0258, unbounded empty DATA frames. The advisory was published on 2026-08-17, after this project's last pipeline run, so it surfaced on the next build rather than through any change here. `h2` arrives transitively through `reqwest` and `hyper`; only that one package moved, everything else in the lockfile is untouched.
+
 ---
 
 ## [1.3.2] - 2026-08-05
