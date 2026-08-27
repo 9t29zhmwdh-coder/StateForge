@@ -34,7 +34,15 @@ layer(base);
   }
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+/*
+  Inside a layer, not outside it. Tailwind 4 puts its utilities into real
+  cascade layers, and an unlayered rule beats a layered one regardless of
+  specificity, so this reset was overriding every padding, margin and gap
+  utility in the application.
+*/
+@layer base {
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+}
 
 body {
   font-family: 'JetBrains Mono', monospace;
