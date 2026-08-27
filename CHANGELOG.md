@@ -6,6 +6,22 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), [Semantic Vers
 
 ---
 
+## [1.3.3] - 2026-08-27
+
+### Fixed
+
+- **The whole interface had lost its spacing.** A global `* { box-sizing: border-box; margin: 0; padding: 0 }` sat at the end of `index.css`, outside any cascade layer. Tailwind 4 puts its utilities into real layers, and an unlayered rule beats a layered one regardless of specificity, so every `p-*`, `px-*`, `py-*`, `gap-*` and `space-y-*` in the application was overridden: 92 uses across 7 files. The input tabs ran together, the language row had no separation, the sidebar sat flush against the window edge.
+
+  Under Tailwind 3 the same CSS was harmless, because those utilities were not layered. The regression therefore arrived with the Tailwind 4 upgrade and showed up in neither the build nor the typecheck. Wrapping the reset in `@layer base` restores the layout the markup has described all along; no markup was touched.
+
+  Found while fixing the same defect in LogLens. A sweep across the other Tauri projects found it here and in LifeSort; ClarityDesk, BugRadar, DeviceHealth, LifePlanner, MailLoom and CleanFlow are unaffected.
+
+### Security
+
+- `h2` 0.4.15 to 0.4.19, closing RUSTSEC-2026-0258, unbounded empty DATA frames. The advisory was published on 2026-08-17, after this project's last pipeline run, so it surfaced on the next build rather than through any change here. `h2` arrives transitively through `reqwest` and `hyper`; only that one package moved, everything else in the lockfile is untouched.
+
+---
+
 ## [1.3.2] - 2026-08-05
 
 ### Added
