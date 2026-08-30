@@ -17,16 +17,16 @@
     "mermaid": "^11",
     "react": "^19",
     "react-dom": "^19",
-    "zustand": "^5.0.14"
+    "zustand": "^5.0.15"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.3",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@vitejs/plugin-react": "^6.0.4",
+    "@vitejs/plugin-react": "^6.1.0",
     "postcss": "^8",
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2",
-    "vite": "^8.1.5"
+    "vite": "^8.2.2"
   }
 }
