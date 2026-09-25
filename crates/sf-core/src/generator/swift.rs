@@ -22,9 +22,10 @@ impl CodeGenerator for SwiftGenerator {
         out.push_str("}\n\n");
 
         // Event enum
+        // Sorted, so the same machine always generates the same file.
         let events: Vec<_> = sm.transitions.iter()
             .filter_map(|t| t.event.as_ref())
-            .collect::<std::collections::HashSet<_>>()
+            .collect::<std::collections::BTreeSet<_>>()
             .into_iter()
             .collect();
 
@@ -55,8 +56,13 @@ impl CodeGenerator for SwiftGenerator {
                 out.push_str("        break\n");
             } else {
                 out.push_str("        switch action {\n");
+                let mut handled = std::collections::BTreeSet::new();
                 for t in outgoing {
                     let event = t.event.as_deref().unwrap_or("any");
+                    // Swift rejects a second `case` for the same event.
+                    if !handled.insert(camel(event)) {
+                        continue;
+                    }
                     let to_state = sm.state_by_id(&t.to_state).map(|s| s.name.as_str()).unwrap_or("unknown");
                     out.push_str(&format!("        case .{}:\n", camel(event)));
                     if !t.actions.is_empty() {
@@ -68,6 +74,10 @@ impl CodeGenerator for SwiftGenerator {
                     if let Some(ref guard) = t.guard {
                         out.push_str(&format!("            // guard: {}\n", guard));
                     }
+                }
+                // Swift requires an exhaustive switch; other events leave the state as it is.
+                if handled.len() < events.len() {
+                    out.push_str("        default:\n            break\n");
                 }
                 out.push_str("        }\n");
             }

@@ -124,7 +124,8 @@ interface LangState {
 }
 
 export const useLangStore = create<LangState>((set) => ({
-  lang: (localStorage.getItem(STORAGE_KEY) as Lang) || 'en',
+  // First start follows the system language; the toggle is remembered after that.
+  lang: (localStorage.getItem(STORAGE_KEY) as Lang) || (navigator.language.toLowerCase().startsWith('de') ? 'de' : 'en'),
   setLang: (lang) => {
     localStorage.setItem(STORAGE_KEY, lang)
     set({ lang })

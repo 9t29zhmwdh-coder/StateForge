@@ -16,6 +16,8 @@ pub async fn generate_code(
         "swift"      => Language::Swift,
         "kotlin"     => Language::Kotlin,
         "go"         => Language::Go,
+        // The UI offered Rust while this fell through to TypeScript.
+        "rust"       => Language::Rust,
         _            => Language::TypeScript,
     };
 
@@ -24,5 +26,5 @@ pub async fn generate_code(
 
 #[tauri::command]
 pub fn supported_languages() -> Vec<String> {
-    vec!["swift".to_string(), "kotlin".to_string(), "typescript".to_string(), "go".to_string()]
+    ["swift", "kotlin", "typescript", "go", "rust"].map(String::from).to_vec()
 }

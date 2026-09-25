@@ -13,7 +13,7 @@ scattered `if` branches and a `status` column, and the only way to know
 whether cancelled can go back to pending is to read every assignment in the
 file and hold them all in your head.
 
-Paste the source, a log file, an API sequence or a description in plain
+Paste the source, a log file, a web server access log or a description in plain
 words. StateForge extracts the states and transitions and renders them as a
 diagram you can edit, then exports Mermaid, DOT, SVG, or generated code in
 five languages.
@@ -48,14 +48,13 @@ StateForge's UI is available in English (default) and German; switch anytime wit
 
 | Feature | Description |
 |---|---|
-| **Code Parser** | Extracts state machines from Swift, Kotlin, TypeScript, Go, Rust |
-| **Log Analyzer** | Reconstructs state flows from log files (JSON, plaintext, nginx, syslog) |
+| **Code Parser** | Finds the state type and the transitions between states in Swift, Kotlin, TypeScript, Go and Rust: enums, sealed classes, union types and `iota` blocks; `switch`/`when`/`match` arms, `if state == X` guards, assignments such as `state = .playing`, `_uiState.value = …`, `setStatus('done')` and reducer returns. The event comes from the checked event or the function name. XState `createMachine` configs are read directly (top-level states) |
+| **Log Analyzer** | Rebuilds the flow from log lines that name a change: `from X to Y`, `X -> Y`, `state changed to Y`, or JSON lines with `from`/`to`/`status`, per entity (`order=17`). Web server access logs (nginx, Apache) become the sequence of API calls per client |
 | **Diagram Engine** | Renders Mermaid, GraphViz DOT, SVG, interactive React Flow |
 | **Code Generator** | Generates idiomatic state machine code in 5 languages |
-| **AI Integration** | Claude (Anthropic API): enhance machines or create from natural language |
-| **Plugin System** | Extend with custom parsers via Rust trait |
+| **AI Integration** | Local Ollama (default) or Claude via the Anthropic API with your key: enhance a machine or create one from a plain-language description. "Auto AI Enhance" enhances every new extraction right away |
 
-> **Note:** The AI backend setting is honoured: pick Ollama and enhancement runs against your own instance, pick Claude and it uses the Anthropic API with your key. Ollama is the default. The "Auto AI Enhance" toggle is still not wired up; enhancement is always manual (see [ROADMAP.md](ROADMAP.md)).
+> **Limits:** extraction reads patterns, not a full parse tree. Nested XState machines and state changes spread across files are not followed; code that sets a state without checking the current one is drawn as reachable from every other state, which is what the code allows. Generated Swift, Rust and TypeScript are compile-checked in development; Go and Kotlin output is reviewed but not compiled.
 
 ---
 

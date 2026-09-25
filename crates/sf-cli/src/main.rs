@@ -35,7 +35,7 @@ enum Cmd {
     Generate {
         /// State machine ID or name
         id: String,
-        /// Target language: swift, kotlin, typescript, go
+        /// Target language: swift, kotlin, typescript, go, rust
         #[arg(short, long, default_value = "typescript")]
         language: String,
         #[arg(short, long)]
@@ -147,6 +147,7 @@ async fn cmd_generate(id: &str, language: &str, output: Option<&str>, db_path: &
         "swift"      => Language::Swift,
         "kotlin"     => Language::Kotlin,
         "go"         => Language::Go,
+        "rust"       => Language::Rust,
         _            => Language::TypeScript,
     };
 

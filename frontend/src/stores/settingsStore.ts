@@ -10,7 +10,7 @@ interface SettingsStore {
 
 const defaults: AppSettings = {
   ai_backend: 'claude', ollama_url: 'http://localhost:11434',
-  ollama_model: 'llama3', theme: 'dark',
+  ollama_model: 'qwen3.5:4b', theme: 'dark',
   default_diagram_format: 'mermaid', auto_ai_enhance: false,
 }
 

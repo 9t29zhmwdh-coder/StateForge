@@ -1,6 +1,6 @@
 {
   "name": "stateforge-frontend",
-  "version": "1.0.10",
+  "version": "1.4.0",
   "private": true,
   "type": "module",
   "scripts": {

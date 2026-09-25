@@ -35,7 +35,11 @@ impl OllamaAnalyzer {
             "model": self.model,
             "prompt": prompt,
             "stream": false,
-            "format": "json"
+            "format": "json",
+            // Reasoning models would otherwise write their thoughts before the JSON;
+            // without num_ctx Ollama reserves the model's full context window.
+            "think": false,
+            "options": { "num_ctx": 8192, "temperature": 0.2 }
         });
 
         let resp = self.client

@@ -30,6 +30,22 @@ async fn get_analyzer(state: &AppState) -> Result<Box<dyn AiAnalyzer>> {
     Ok(Box::new(ClaudeAnalyzer::new(key)))
 }
 
+/// "Auto AI Enhance" was saved but never read. When it is on, a freshly
+/// extracted machine is enhanced right away; if the AI fails, the extraction
+/// still stands and the reason goes to the log.
+pub(crate) async fn auto_enhance(state: &AppState, sm: &mut StateMachine) {
+    if !state.settings.read().await.auto_ai_enhance {
+        return;
+    }
+    let result = match get_analyzer(state).await {
+        Ok(analyzer) => analyzer.enhance(sm).await.map_err(|e| e.to_string()),
+        Err(e) => Err(e.to_string()),
+    };
+    if let Err(reason) = result {
+        tracing::warn!("auto AI enhance skipped: {reason}");
+    }
+}
+
 #[tauri::command]
 pub async fn ai_enhance_machine(
     machine_id: String,

@@ -5,6 +5,5 @@ pub mod diagram;
 pub mod generator;
 pub mod ai;
 pub mod db;
-pub mod plugin;
 
 pub use models::*;

@@ -33,9 +33,10 @@ impl CodeGenerator for GoGenerator {
         out.push_str("    default:\n        return \"unknown\"\n    }\n}\n\n");
 
         // Event type + iota
+        // Transitions without an event use "Any"; it needs its constant too.
         let events: Vec<_> = sm.transitions.iter()
-            .filter_map(|t| t.event.clone())
-            .collect::<std::collections::HashSet<_>>()
+            .map(|t| t.event.clone().unwrap_or_else(|| "Any".into()))
+            .collect::<std::collections::BTreeSet<_>>()
             .into_iter()
             .collect();
 
@@ -65,8 +66,13 @@ impl CodeGenerator for GoGenerator {
             if outgoing.is_empty() { continue; }
 
             out.push_str(&format!("    case {}State{}:\n        switch event {{\n", name, pascal(&state.name)));
+            let mut handled = std::collections::BTreeSet::new();
             for t in outgoing {
                 let event = t.event.as_deref().unwrap_or("Any");
+                // Go rejects a duplicate case in one switch.
+                if !handled.insert(pascal(event)) {
+                    continue;
+                }
                 let to_state = sm.state_by_id(&t.to_state).map(|s| s.name.as_str()).unwrap_or("Unknown");
                 out.push_str(&format!("        case {}Event{}:\n            m.State = {}State{}\n            return true\n",
                     name, pascal(event), name, pascal(to_state)));

@@ -13,7 +13,7 @@ Sie existiert als verstreute `if`-Zweige und eine `status`-Spalte, und ob
 storniert wieder zu offen werden kann, weisst du erst, wenn du jede Zuweisung
 in der Datei gelesen und gleichzeitig im Kopf hast.
 
-Quellcode einfügen, eine Logdatei, eine API-Sequenz oder eine Beschreibung in
+Quellcode einfügen, eine Logdatei, ein Webserver-Access-Log oder eine Beschreibung in
 normalen Worten. StateForge zieht Zustände und Übergänge heraus und stellt sie
 als bearbeitbares Diagramm dar, exportierbar als Mermaid, DOT, SVG oder als
 generierter Code in fünf Sprachen.
@@ -49,14 +49,13 @@ Die Oberfläche von StateForge ist auf Englisch (Standard) und Deutsch verfügba
 
 | Funktion | Beschreibung |
 |---|---|
-| **Code-Parser** | Extrahiert State Machines aus Swift, Kotlin, TypeScript, Go, Rust |
-| **Log-Analyzer** | Rekonstruiert Zustandsflüsse aus Log-Dateien (JSON, Plaintext, Nginx, Syslog) |
+| **Code-Parser** | Findet den Zustandstyp und die Übergänge zwischen den Zuständen in Swift, Kotlin, TypeScript, Go und Rust: Enums, sealed classes, Union-Typen und `iota`-Blöcke; `switch`/`when`/`match`-Zweige, `if state == X`-Prüfungen, Zuweisungen wie `state = .playing`, `_uiState.value = …`, `setStatus('done')` und Reducer-Rückgaben. Das Ereignis stammt aus dem geprüften Event oder dem Funktionsnamen. XState-`createMachine`-Konfigurationen werden direkt gelesen (oberste Ebene) |
+| **Log-Analyzer** | Baut den Ablauf aus Logzeilen nach, die einen Wechsel nennen: `from X to Y`, `X -> Y`, `state changed to Y` oder JSON-Zeilen mit `from`/`to`/`status`, je Einheit (`order=17`). Access-Logs von Webservern (nginx, Apache) werden zur Abfolge der API-Aufrufe je Client |
 | **Diagramm-Engine** | Rendert Mermaid, GraphViz DOT, SVG, interaktives React Flow |
 | **Code-Generator** | Generiert idiomatischen State-Machine-Code in 5 Sprachen |
-| **KI-Integration** | Claude (Anthropic API): Maschinen anreichern oder aus Beschreibung erstellen |
-| **Plugin-System** | Erweiterbar mit eigenen Parsern via Rust-Trait |
+| **KI-Integration** | Lokales Ollama (Standard) oder Claude über die Anthropic-API mit deinem Schlüssel: Maschinen anreichern oder aus einer Beschreibung erstellen. „Auto-KI-Anreicherung“ reichert jede neue Extraktion sofort an |
 
-> **Hinweis:** Die Backend-Einstellung greift: mit Ollama läuft die Anreicherung gegen deine eigene Instanz, mit Claude über die Anthropic-API mit deinem Schlüssel. Ollama ist die Voreinstellung. Der Schalter "Auto-KI-Anreicherung" ist weiterhin nicht angebunden, die Anreicherung erfolgt immer manuell (siehe [ROADMAP.md](ROADMAP.md)).
+> **Grenzen:** Die Erkennung liest Muster, keinen vollständigen Syntaxbaum. Verschachtelte XState-Maschinen und Zustandswechsel über mehrere Dateien werden nicht verfolgt; Code, der einen Zustand setzt, ohne den aktuellen zu prüfen, erscheint als von jedem anderen Zustand aus erreichbar, denn genau das erlaubt der Code. Generierter Swift-, Rust- und TypeScript-Code wird in der Entwicklung kompiliert; Go- und Kotlin-Ausgabe ist geprüft, aber nicht kompiliert.
 
 ---
 
