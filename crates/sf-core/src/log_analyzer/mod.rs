@@ -73,10 +73,8 @@ fn read_text(line: &str) -> Option<Step> {
         (Some(c[1].to_string()), c[2].to_string())
     } else if let Some(c) = ARROW.captures(line).filter(|c| is_state_word(&c[1]) && is_state_word(&c[2])) {
         (Some(c[1].to_string()), c[2].to_string())
-    } else if let Some(c) = TO_ONLY.captures(line) {
-        (None, c[1].to_string())
     } else {
-        return None;
+        (None, TO_ONLY.captures(line)?[1].to_string())
     };
     if !is_state_word(&to) {
         return None;
