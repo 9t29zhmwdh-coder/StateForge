@@ -25,6 +25,9 @@ pub fn render_state(sm: &StateMachine, config: &DiagramConfig) -> Result<String>
 
         match state.kind {
             StateKind::Final => {
+                if sname != state.name {
+                    out.push_str(&format!("    state \"{}\" as {}\n", state.name.replace('"', "'"), sname));
+                }
                 out.push_str(&format!("    {} --> [*]\n", sname));
             }
             StateKind::Error => {
@@ -36,6 +39,9 @@ pub fn render_state(sm: &StateMachine, config: &DiagramConfig) -> Result<String>
             _ => {
                 if let Some(ref desc) = state.description {
                     out.push_str(&format!("    state \"{}\" as {}\n", desc, sname));
+                } else if sname != state.name {
+                    // "POST /orders/{id}/pay" keeps its readable name as the label.
+                    out.push_str(&format!("    state \"{}\" as {}\n", state.name.replace('"', "'"), sname));
                 }
             }
         }
@@ -65,11 +71,9 @@ pub fn render_state(sm: &StateMachine, config: &DiagramConfig) -> Result<String>
             label_parts.push(format!("/{}", t.actions.join(", ")));
         }
 
-        let arrow = if config.highlight_error_paths && t.kind == TransitionKind::Error {
-            "-->>"
-        } else {
-            "-->"
-        };
+        // `-->>` is not state-diagram syntax: Mermaid drew a phantom ">" node and
+        // put the label into the target box. Error states are coloured below instead.
+        let arrow = "-->";
 
         if label_parts.is_empty() {
             out.push_str(&format!("    {} {} {}\n",
@@ -167,4 +171,21 @@ fn sanitize(name: &str) -> String {
     name.chars()
         .map(|c| if c.is_alphanumeric() || c == '_' { c } else { '_' })
         .collect()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn error_transitions_use_valid_arrows_and_names_keep_labels() {
+        let log = "order=1 state changed from pending to paid\norder=1 state changed from paid to payment_failed\n";
+        let sm = crate::log_analyzer::LogAnalyzer::analyze(log, None).unwrap();
+        let out = render_state(&sm, &DiagramConfig::default()).unwrap();
+        assert!(!out.contains("-->>"), "{out}");
+        let api = "1.2.3.4 - - [25/Sep/2026:08:00:01 +0000] \"POST /orders HTTP/1.1\" 201 5\n1.2.3.4 - - [25/Sep/2026:08:00:02 +0000] \"POST /orders/7/pay HTTP/1.1\" 200 5\n";
+        let sm = crate::log_analyzer::LogAnalyzer::analyze(api, None).unwrap();
+        let out = render_state(&sm, &DiagramConfig::default()).unwrap();
+        assert!(out.contains("state \"POST /orders/{id}/pay\" as POST__orders__id__pay"), "{out}");
+    }
 }

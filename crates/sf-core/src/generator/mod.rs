@@ -2,6 +2,7 @@ pub mod swift;
 pub mod kotlin;
 pub mod typescript;
 pub mod go;
+pub mod rust;
 
 use crate::models::{StateMachine, Language};
 use anyhow::Result;
@@ -18,6 +19,7 @@ pub fn generate(sm: &StateMachine, lang: &Language) -> Result<String> {
         Language::Kotlin     => Box::new(kotlin::KotlinGenerator),
         Language::TypeScript => Box::new(typescript::TypeScriptGenerator),
         Language::Go         => Box::new(go::GoGenerator),
+        Language::Rust       => Box::new(rust::RustGenerator),
         _                    => Box::new(typescript::TypeScriptGenerator),
     };
     gen.generate(sm)

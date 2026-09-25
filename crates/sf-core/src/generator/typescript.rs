@@ -20,7 +20,7 @@ impl CodeGenerator for TypeScriptGenerator {
         // Event union type
         let events: Vec<_> = sm.transitions.iter()
             .filter_map(|t| t.event.clone())
-            .collect::<std::collections::HashSet<_>>()
+            .collect::<std::collections::BTreeSet<_>>()
             .into_iter()
             .collect();
 
@@ -39,7 +39,7 @@ impl CodeGenerator for TypeScriptGenerator {
         // Transition map
         out.push_str(&format!("export const {}Transitions: Record<{}State, Partial<Record<string, {}State>>> = {{\n", name, name, name));
         for state in &sm.states {
-            let outgoing = sm.outgoing(&state.id);
+            let outgoing = first_per_event(sm.outgoing(&state.id));
             out.push_str(&format!("  '{}': {{\n", state.name));
             for t in &outgoing {
                 let to = sm.state_by_id(&t.to_state).map(|s| s.name.as_str()).unwrap_or("unknown");
@@ -69,14 +69,15 @@ impl CodeGenerator for TypeScriptGenerator {
         ));
 
         for state in &sm.states {
-            let outgoing = sm.outgoing(&state.id);
+            let outgoing = first_per_event(sm.outgoing(&state.id));
             out.push_str(&format!("    '{}': {{\n", state.name));
             if !outgoing.is_empty() {
                 out.push_str("      on: {\n");
                 for t in &outgoing {
                     let to = sm.state_by_id(&t.to_state).map(|s| s.name.as_str()).unwrap_or("unknown");
                     let event = t.event.as_deref().unwrap_or("NEXT");
-                    out.push_str(&format!("        {}: {{ target: '{}' }},\n", event, to));
+                    // Quoted: event names such as "not Ok" are no identifiers.
+                    out.push_str(&format!("        '{}': {{ target: '{}' }},\n", event, to));
                 }
                 out.push_str("      },\n");
             }
@@ -86,6 +87,13 @@ impl CodeGenerator for TypeScriptGenerator {
 
         Ok(out)
     }
+}
+
+/// One transition per event: a second one with the same key is a TypeScript
+/// error ("multiple properties with the same name") and could never fire.
+fn first_per_event(list: Vec<&crate::models::Transition>) -> Vec<&crate::models::Transition> {
+    let mut seen = std::collections::BTreeSet::new();
+    list.into_iter().filter(|t| seen.insert(t.event.clone())).collect()
 }
 
 fn pascal(s: &str) -> String {

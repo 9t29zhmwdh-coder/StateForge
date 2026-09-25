@@ -16,8 +16,6 @@
 
 ## v0.2.0, Edit & Annotate
 
-- Wire up the "Auto AI Enhance" toggle in Settings; `auto_ai_enhance` is
-  stored in `AppSettings` but never read anywhere, so toggling it has no effect
 - In-canvas FSM editing (add/remove states and transitions via GUI)
 - Transition guard and action annotation editor
 - Import previously exported FSM (Mermaid or DOT to `FsmModel`)
@@ -26,7 +24,8 @@
 
 ## v0.3.0, Extended Extraction & Analysis
 
-- API sequence extraction (HTTP log / OpenAPI spec to FSM)
+- API sequence extraction from OpenAPI specs (access logs are read since 1.4.0)
+- Nested XState machines and state changes spread across several files
 - FSM validation (reachability, deadlock detection, nondeterminism warnings)
 - Simulation mode: step through FSM states interactively with test inputs
 - Multiple FSMs per project (tabbed view, cross-reference)

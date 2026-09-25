@@ -6,6 +6,42 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), [Semantic Vers
 
 ---
 
+## [1.4.0] - 2026-09-25
+
+The core promise, "draws the state machine that is already in your code", did not hold: on real examples the diagrams had states and almost no arrows. This release rebuilds extraction and makes the rest of the README true.
+
+### Added
+
+- **Transition extraction for all five languages** (`parser/flow.rs`). The state the code is in comes from `case`/`when`/`match` arms and `if state == X` guards, the event from the checked event or the function name, the target from assignments (`state = .x`, `_uiState.value = …`, `setStatus('x')`, `status: 'x'`), arm results and reducer returns. Sequential changes in one function chain (`uploading` then `done`), a `catch` block continues from the state before the `try`, an `else` branch is labelled `not <event>`.
+- **Rust parser** (enums, `match` on state or `(state, event)` tuples); the README listed Rust, it fell back to a generic guess.
+- **XState** `createMachine` configs read with brace matching (top-level states, `on`, `target`, `type: 'final'`, `initial`); before: 0 states.
+- **Rust code generator** (enum, event enum, `next()`, `is_final()`); the UI offered Rust while it generated TypeScript.
+- **Access logs** (nginx, Apache) become the API call flow per client; this is the "API sequence" the README promised.
+- "Auto AI Enhance" now enhances every new extraction; a failing AI keeps the extraction.
+
+### Fixed
+
+- Before: Swift, Kotlin and Go examples produced 0 transitions, XState produced nothing, and TypeScript attached every transition to whichever state a HashMap returned first.
+- State kinds come from the graph (a state nothing leaves is final) and whole words, not substrings: "pending" was final because it contains "end".
+- Log analyzer rewritten: it mixed up events and states ("pending --> shipped : paid"), read nothing from JSON lines or access logs, and returned an empty diagram instead of an error.
+- Generated Swift did not compile (non-exhaustive `switch`, duplicate cases); generated TypeScript did not compile (unquoted event names, duplicate keys); generated Go had duplicate cases and a missing `Any` constant; generated Kotlin set every target of an event in a row instead of the one for the current state, and lacked imports. Swift, Rust and TypeScript output is now compile-checked for eight example machines.
+- Mermaid export wrote `-->>` for error transitions, which is not state-diagram syntax (a phantom ">" node appeared); names such as `POST /orders/{id}/pay` keep their label.
+- Language detection recognises Rust and puts Go before Swift.
+- Ollama: `think: false`, `num_ctx`, low temperature; default model `qwen3.5:4b`. Stored settings survive new fields.
+- The UI starts in the system language.
+
+### Removed
+
+- The plugin system (a trait and a registry nothing used) and its README line.
+- The old per-language parsers, replaced by the shared extractor.
+
+### Security
+
+- rustls 0.23.45 (RUSTSEC-2026-0285; affects the Claude and Ollama connections).
+- Content security policy for the window, ad-hoc signing identity on macOS, npm audit fix in the frontend lockfile.
+
+---
+
 ## [1.3.3] - 2026-08-27
 
 ### Fixed
