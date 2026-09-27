@@ -6,6 +6,19 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), [Semantic Vers
 
 ---
 
+## [1.4.1] - 2026-09-27
+
+### Changed
+
+Dependency and CI updates merged since v1.4.0, each with green checks:
+
+- chore(ci): bump the actions group across 1 directory with 5 updates (#86)
+- chore(deps): bump dirs from 6.0.0 to 7.0.0 (#90)
+- chore(deps): bump the npm group across 1 directory with 12 updates (#85)
+- chore(deps): bump the cargo group across 1 directory with 6 updates (#88)
+
+---
+
 ## [1.4.0] - 2026-09-25
 
 The core promise, "draws the state machine that is already in your code", did not hold: on real examples the diagrams had states and almost no arrows. This release rebuilds extraction and makes the rest of the README true.
