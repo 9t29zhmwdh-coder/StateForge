@@ -22,7 +22,7 @@ sqlx         = { workspace = true }
 # ohne dass ein Fehler gemeldet wurde.
 keyring      = { version = "3", features = ["apple-native", "windows-native", "async-secret-service", "crypto-rust", "tokio"] }
 async-trait  = "0.1"
-dirs         = "6"
+dirs         = "7"
 
 [dev-dependencies]
 # Ohne Features deklariert, mit Absicht: Cargo vereinigt Features ueber den
