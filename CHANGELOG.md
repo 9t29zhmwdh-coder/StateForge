@@ -6,6 +6,14 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), [Semantic Vers
 
 ---
 
+## [1.4.5] - 2026-09-30
+
+### Changed
+
+- The Mermaid view now runs on mermaid 12.0.0 (from 11.17.2, #89). Mermaid 12 lays diagrams out with ELK and draws a new default look, so the app passes `layout: 'dagre'` and `look: 'classic'` and the diagrams keep the look they had with mermaid 11. Mermaid 12 itself needs a WebView with ES2024 support, that is Safari 17.4 or newer on macOS. On an older system the Mermaid view can stay empty, the other diagram formats are not affected.
+
+---
+
 ## [1.4.4] - 2026-09-30
 
 ### Changed
