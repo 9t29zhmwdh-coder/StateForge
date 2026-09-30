@@ -33,7 +33,8 @@ export function SplitView() {
     if (fmt !== 'mermaid' || !diagram) return
     // Dynamic mermaid render
     import('mermaid').then(({ default: mermaid }) => {
-      mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' })
+      // Mermaid 12 lays diagrams out with ELK and draws a new default look. These two options keep the look of 11.
+      mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose', layout: 'dagre', look: 'classic' })
       mermaid.render('sf-mermaid', diagram).then(({ svg }) => setMermaidHtml(svg)).catch(console.error)
     })
   }, [diagram, fmt])
