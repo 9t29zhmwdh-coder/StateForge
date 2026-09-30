@@ -6,6 +6,16 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), [Semantic Vers
 
 ---
 
+## [1.4.4] - 2026-09-30
+
+### Changed
+
+Dependency and CI updates merged since v1.4.3, each with green checks:
+
+- chore(deps): bump the npm group in /frontend with 2 updates (#94)
+
+---
+
 ## [1.4.3] - 2026-09-30
 
 ### Changed
