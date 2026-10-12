@@ -6,6 +6,20 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), [Semantic Vers
 
 ---
 
+## [1.4.7] - 2026-10-12
+
+### Changed
+
+Dependency and CI updates merged since v1.4.6, each with green checks:
+
+- chore(deps): bump the npm group in /frontend with 4 updates (#97)
+- chore(deps): bump the cargo group with 2 updates (#98)
+- chore(ci): bump the actions group with 5 updates (#99)
+- chore(deps): bump source-map-js from 1.2.1 to 1.2.2 in /frontend (#101)
+- chore(deps): bump lodash-es and mermaid in /frontend (#102)
+
+---
+
 ## [1.4.6] - 2026-10-11
 
 ### Fixed
